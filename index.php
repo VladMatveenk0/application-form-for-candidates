@@ -23,7 +23,7 @@
                 <option value="__">тут будет список должностей</option>
                 <option value="__">тут будет список должностей</option>
                 <option value="__">тут будет список должностей</option>
-            </p>
+            </select></p>
             <ol>
                 <li><p><input type="text" name="фамилия" placeholder="Фамилия" required><span class="validity"></span><br>
                     <input type="text" name="имя" placeholder="Имя" required><span class="validity"></span><br>
