@@ -18,50 +18,53 @@
         ?>
         <form action="process.php" method="post">
             <p><b>Приложение №9 к Регламенту подбора и найма персонала в редакции Приложения №2 к Приказу №…<br></b></p>
-            <p><b>А Н К Е Т А кандидата на должность: &#32</b><select id="должности" name="должность">
-                <option value="__">тут будет список должностей</option>
-                <option value="__">тут будет список должностей</option>
-                <option value="__">тут будет список должностей</option>
-                <option value="__">тут будет список должностей</option>
-            </select></p>
+            <p><b>А Н К Е Т А кандидата на должность: &#32</b><input type="text" id="job" name="job" placeholder="введите должность"> 
             <ol>
-                <li><p><input type="text" name="фамилия" placeholder="Фамилия" required><span class="validity"></span><br>
-                    <input type="text" name="имя" placeholder="Имя" required><span class="validity"></span><br>
-                    <input type="text" name="отчество" placeholder="Отчество"><br>
-                <h7>(если изменяли фамилию, имя или отчество, то укажите их)</h7></p></li>
+                <li><p><label for="second name">Фамилия</label><input type="text" name="second name" placeholder="" required>
+                    <label for="name">Имя</label><input type="text" name="name" placeholder="" required>
+                    <label for="surname">Отчество</label><input type="text" name="surname" placeholder="">
+                    <h7>(если изменяли фамилию, имя или отчество, то укажите их)</h7></p></li>
 
-                <li><p><input type="text" name="дата рождения" placeholder="Год, число и месяц рождения" required><span class="validity"></span></p></li>
-                <li><p><input type="text" name="место рождения" placeholder= "Место рождения" required><span class="validity"></span><br>(село, деревня, город, район, область, край, республика)</p></li>
+                <li><p><label for="date birth">Дата рождения</label><input type="date" name="data birth" placeholder="" required></p></li>
+                <li><p><label for="place birth">Место рождения</label><input type="text" name="place birth" placeholder= "" required>
+                    <br>(село, деревня, город, район, область, край, республика)</p></li>
 
-                <li><p><input type="text" name="паспорт серия" placeholder= "Паспорт серия" required><span class="validity"></span>
-                &#32<input type="text" name="паспорт номер" placeholder="номер" required><span class="validity"></span>
-                &#32<input type="date" name="паспорт дата" placeholder="когда выдан" required><span class="validity"></span>
-                &#32<br><input type="text" name="паспорт кем выдан" placeholder="кем выдан" size=30 required><span class="validity"></span></p></li>
+                <li><p><label for="nation">Гражданство</label><input type="text" id="nation" name="nation" required>
+                    (если изменяли, то укажите, когда и по какой причине, указать гражданство другого государства при его наличии)
+                </p></li>
 
-                <li><p><input type="text" name="загранпаспорт серия" placeholder= "Загранпаспорт серия">&#32<input type="text" name="загранпаспорт номер" placeholder="номер">
-                &#32<input type="date" name="загранпаспорт дата" placeholder="когда выдан"> &#32<br> <input type="text" name="загранпаспорт кем выдан" placeholder="кем выдан" size=30></p></li>
+                выше будет не input а select нужен список гражданств. ниже будет script.
+
+                <li><p><label for="passport">Паспорт</label><input type="text" name="passport" placeholder= "Номер и серия" required>
+                    <label for="passport date">Когда выдан</label><input type="date" name="passport date" required>
+                    <label for="passport place">Кем выдан</label><input type="text" name="passport place" placeholder="" required></p></li>
+
+                <li><p><label for="zpassport">Загран паспорт</label><input type="text" name="zpassport" placeholder= "Номер и серия" required>
+                    <label for="zpassport date">Когда выдан</label><input type="date" name="zpassport date" required>
+                    <label for="zpassport place">Кем выдан</label><input type="text" name="zpassport place" placeholder="" required></p></li>
 
                 <li><p>
-                    Адрес<br>
-                    а)&#32<input type="text" name="адрес оф" placeholder="По месту регистрации" size=30 required><span class="validity"></span>
-                    <br>(почтовый индекс, область, район, город, село, деревня, улица, дом, корпус, квартира)<br>
-                    б)&#32<input type="text" name="адрес факт" placeholder="Фактический (если отличается) " size=30><br>(почтовый индекс, область, район, город, село, деревня, улица, дом, корпус, квартира)
+                    <label for="of address">Адрес по месту регистрации</label><input type="text" id="of address" name="of address" required>
+                    <label for="fact address">Адрес фактический(если отличается)</label><input type="text" id="fact address" name="fact address" required>
+                    (индекс, область, район, город, село, деревня, улица, дом, корпус, квартира)
                 </p></li>
 
-                <li><p><input type="email" name = "почта" placeholder="Адрес эл. Почты" required><span class="validity"></span>
-                <br> <input type="number" name="телефон" placeholder="№ телефона " required><span class="validity"></span></p></li>
+                <li><p><label for="mail">Адрес эл. почты</label><input type="email" id="mail" name = "mail" placeholder="" required></p></li>
+                <li><p><label for="phone">Номер телефона</label><input type="number" id="phone" name="phone" placeholder="" required></p></li>
 
-                <li><p>Номер страхового свидетельства государственного пенсионного страхования
-                    <br><input type="text" name="Номер страхового свидетельства" required><span class="validity"></span></p></li>
-
-                <li><p>Индивидуальный номер налогоплательщика<br> <input type="text" name="Индивидуальный номер налогоплательщика" required><span class="validity"></span></p></li>
-
-                <li><p><input type="text" name="гражданство" placeholder="Гражданство" required><span class="validity"></span>
-                    <br>(если изменяли, то укажите, когда и по какой причине, указать гражданство другого государства при его наличии)
+                <li><p><label for="snils">Номер страхового свидетельства государственного пенсионного страхования</label>
+                    <input type="text" id="snils" name="snils" required>
                 </p></li>
 
-                <li><p><input type="text" name="наличие иностранного паспорта" placeholder="Наличие иностранного паспорта" size=30>
-                    <br>(указать страну, серию и номер при его наличии)
+                <li><p><label for="inn">Индивидуальный номер налогоплательщика</label><input type="text" id="inn" name="inn" required></p></li>
+
+                <li><p><label for="foreign passport">Наличие иностранного паспорта</label><select id="foreign passport" name="foreign passport">
+                    <option value="no">Нет иностранного паспорта</option>
+                    <option value="yes">Есть иностранный паспорт</option>
+                    </select>
+                    need script
+                    <label for="foreign passport country">Страна</label><input type="text" id="foreign passport country" name="foreign passport country" required>
+                    <label for="foreign passport num">Номер и серия</label><input type="text" id="foreign passport num" name="foreign passport num" required>
                 </p></li>
 
                 <li><p><table width = 600 border="1">
@@ -72,17 +75,17 @@
                                 <th scope="col">Дата окончания</th>
                                 <th scope="col">Полное наименование учебного заведения</th>
                                 <th scope="col">Специальность (специализация) по диплому, Квалификация по диплому, Наименования курса повышения квалификации</th>
-                                <th scope="col">Номер и дата выдачи диплома, сертификата, удостоверения</th>
+                                <th scope="col">?Номер и дата выдачи диплома, сертификата, удостоверения?</th>
                                 <th scope="col">&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody id="dynamic_1">
                             <tr>
-                                <td><input type="text" name="дата поступления 1"></td>
-                                <td><input type="text" name="дата окончания 1"></td>
-                                <td><input type="text" name="учебное заведение"></td>
-                                <td><input type="text" name="Специальность"></td>
-                                <td><input type="text" name="Номер и дата"></td>
+                                <td><input type="text" name="data start education"></td>
+                                <td><input type="text" name="date end educatioin"></td>
+                                <td><input type="text" name="educational institution"></td>
+                                <td><input type="text" name="speciality"></td>
+                                <td><input type="text" name="?Номер и дата?"></td>
                                 <td>
                                     <button type="button" class="add">+</button>
                                     <button type="button" class="del">-</button>
@@ -92,7 +95,7 @@
                     </table>
                 </p></li>
 
-                <li><p><input type="text" name="ученое звание" placeholder="Ученая степень, ученое звание" size=30><br>(номер диплома, дата выдачи)</p></li>
+                <li><p><label for="title">Ученая степень, ученое звание</label><input type="text" id="title" name="title"></p></li>
 
                 <li><p>
                     <table width=600 border="1">
@@ -110,10 +113,10 @@
                         </thead>
                         <tbody id="dynamic_2">
                             <tr>
-                                <td><input type="text" name="дата поступления 2"></td>
-                                <td><input type="text" name="дата окончания 2"></td>
-                                <td><input type="text" name="должность в организации"></td>
-                                <td><input type="text" name="местонахождение организации">
+                                <td><input type="text" name="date start work"></td>
+                                <td><input type="text" name="date ebd work"></td>
+                                <td><input type="text" name="job title"></td>
+                                <td><input type="text" name="work place">
                                 </td>
                                 <td>
                                     <button type="button" class="add">+</button>
@@ -124,7 +127,7 @@
                     </table>
                 </p></li>
 
-                <li><p>Семейное положение в момент заполнения анкеты<br><input type="text" name="статус семьи" required><span class="validity"></span></p></li>
+                <li><p><label for="family status">Положение в момент заполнения анкеты</label><input type="text" id="family status" name="family status" required></p></li>
 
                 <li><p><table width = 600 border="1">
                     <caption>Ваши близкие родственники (отец, мать, братья, сестры, дети, а также муж (жена), в том числе бывшие)</caption>
@@ -132,7 +135,7 @@
                             <tr>
                                 <th scope="col">Степень родства</th>
                                 <th scope="col">Фамилия, имя, отчество*</th>
-                                <th scope="col">Год, место рождения</th>
+                                <th scope="col">?Год, место рождения?</th>
                                 <th scope="col">Место работы, должность</th>
                                 <th scope="col">Адрес места жительства</th>
                                 <th scope="col">&nbsp;</th>
@@ -140,11 +143,11 @@
                         </thead>
                         <tbody id="dynamic_3">
                             <tr>
-                                <td><input type="text" name="степень родства"></td>
-                                <td><input type="text" name="фио родственника"></label></td>
+                                <td><input type="text" name="degree kinship"></td>
+                                <td><input type="text" name="full name relative"></label></td>
                                 <td><input type="text" name="год, место рождения родственника"></td>
                                 <td><input type="text" name="Специальность"></td>
-                                <td><input type="text" name="Номер и дата"></td>
+                                <td><input type="da" name="Номер и дата"></td>
                                 <td>
                                     <button type="button" class="add">+</button>
                                     <button type="button" class="del">-</button>
@@ -154,10 +157,10 @@
                     </table></p></li>
 
                 <li><p>Имеются ли у Вас или жены (мужа) родственники, постоянно проживающие за границей (укажите их фамилию, имя, отчество, год рождения, степень родства, место жительства,
-                    с какого времени они проживают за границей)<br><input type="text" name="родственнкии за границой" size=30>
+                    с какого времени они проживают за границей)<br><input type="text" name="родственнкии за границой">
                 </p></li>
 
-                <li><p>Отношение к воинской обязанности, воинское звание, ВУС, военкомат<br><input type="text" name="военкомат" size=30 required><span class="validity"></span></p></li>
+                <li><p>Отношение к воинской обязанности, воинское звание, ВУС, военкомат<br><input type="text" name="военкомат"required></p></li>
 
                 <li><p><p>Документы, дающие право на льготы<br><textarea name="документы на льготы" cols = 50></textarea></p></p></li>
 
@@ -168,16 +171,11 @@
                 <li><p>Полное наименование и адрес организаций, предприятий и т.п., в которых являетесь или являлись аффилированным лицом<br> <textarea name="аффилированное лицо" cols=50 rows=4></textarea></p></li>
 
                 <li><legend>Наличие судимости</legend>
-                    <div>
-                        <input type="radio" id="нет судимости" name="судимость" value="Нет судимости" checked />
-                        <label for="нет судимости">Нет</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="есть судимость" name="судимость" value="Есть судимость" />
-                        <label for="есть судимость">Да</label>
-                    </div>
+                    <label><input type="radio" id="нет судимости" name="судимость" value="Нет судимости" checked />Нет</label>
+                    <label><input type="radio" id="есть судимость" name="судимость" value="Есть судимость" />Да</label>
                     Когда, за что и по какой статье УК РФ, на какой срок были осуждены<br>
-                    <input type="text" name="судимости" size=30>
+                    <input type="text" name="судимости" required>
+                    need script
                 </p></li>
 
                 <li><p>Источник получения информации о данном месте работы<br> <input type="text" name="источник информации о работе" placeholder=""></p></li>
@@ -194,29 +192,14 @@
 
                 <li>
                     <legend>В каких социальных сетях имеются аккаунты</legend>
-
-                    <div>
-                        <input type="radio" id="Одноклассники" name="соцсеть" value="Одноклассники" checked />
-                        <label for="Одноклассники">Одноклассники</label>
-                    </div>
-
-                    <div>
-                        <input type="radio" id="Вконтакте" name="соцсеть" value="Вконтакте" />
-                        <label for="Вконтакте">Вконтакте</label>
-                    </div>
-
-                    <div>
-                        <input type="radio" id="Не имею" name="соцсеть" value="Не имею" />
-                        <label for="Не имею">Не имею</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="Другие соцсети" name="соцсеть" value="Другие соцсети" />
-                        <label for="Другие соцсети">Другое&#32<input type="text" name="другая соцсеть" size=20></label>
-                    </div>
+                    <label><input type="checkbox" id="Одноклассники" name="соцсеть" value="Одноклассники" checked />Одноклассники</label>
+                    <label><input type="checkbox" id="Вконтакте" name="соцсеть" value="Вконтакте" />Вконтакте</label>
+                    <label><input type="checkbox" id="Не имею" name="соцсеть" value="Не имею" />Не имею</label>
+                    <label><input type="checkbox" id="Другие соцсети" name="соцсеть" value="Другие соцсети" />Другое&#32<input type="text" name="другая соцсеть"></label>
                 </li>
 
             </ol>
-            <p><input type="checkbox" id = "подтверждение" required/><label for="подтверждение">Я подтверждаю, что все указанные мною в настоящей анкете сведения полны и соответствуют действительности.
+            <p><label><input type="checkbox" id = "подтверждение" name="" required/>Я подтверждаю, что все указанные мною в настоящей анкете сведения полны и соответствуют действительности.
             Мне известно, что заведомо ложные сведения, сообщенные о себе в анкете, могут повлечь отказ в трудоустройстве либо расторжение трудового договора.
             На проведение в отношении меня проверочных мероприятий согласен(а). 
             При изменении любых анкетных данных обязуюсь в 3-х дневный срок сообщить в подразделение по управлению персоналом новые сведения. 
