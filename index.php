@@ -224,7 +224,7 @@
 
             <input name="sub" type="submit" value="Сохранить" style="margin: 20px">
         </form>
-        <script src="dynamicTable.js"></script>
+        <script src="dynamictable.js"></script>
         <script>
             new DynamicTable( document.getElementById("dynamic_1") );
             new DynamicTable( document.getElementById("dynamic_2") );
