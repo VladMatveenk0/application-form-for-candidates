@@ -11,7 +11,7 @@
   }
   
   form {
-    max-width: 700px;
+    max-width: 800px;
     margin: 50px auto;
     padding: 16px;
     border: 1px solid #eaeaea;
@@ -35,9 +35,10 @@
     height: auto;
     margin: 0;
     outline: 0;
-    padding: 8px 18px;
+    padding: 8px;
     height: 48px;
-    width: 95%;
+    width: 100%;
+    max-width: 750px;
     color: #8a97a0;
     box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
     margin-bottom: 16px;
