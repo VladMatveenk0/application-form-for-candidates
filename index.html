@@ -9,19 +9,14 @@
         <link rel="stylesheet" href="css/main.css">
     </head>
     <body>
-        <?php //class DB extends SQLite3 {
-        //function __construct( $file ){
-            //$this->open( $file );
-            //}
-        //}
-        //$db = new DB( 'data.db' );
-        ?>
         <center><h1>Анкета</h1></Center>
         <form action="process.php" method="post">
             <p><label for="second_name">Фамилия</label><input type="text" name="second_name" placeholder="" required>
                 <label for="name">Имя</label><input type="text" name="name" placeholder="" required>
                 <label for="surname">Отчество</label><input type="text" name="surname" placeholder="">
-                <label><input type="checkbox" id="fullname_changed" name="fullname_changed">если изменяли фамилию, имя или отчество</label></p>
+                <label><input type="checkbox" id="fullname_changed" name="fullname_changed">если изменяли фамилию, имя или отчество</label>
+                <div id="fullname_changed_inputs"></div>
+            </p>
 
             <p><label for="date_birth">Дата рождения</label><input type="date" name="data_birth" placeholder="" required></p>
             <p><label for="place_birth">Место рождения</label><input type="text" name="place_birth" placeholder= "" required>
@@ -48,7 +43,7 @@
                 <label><input type="checkbox" id="nation_changed" name="nation_changed">укажите если изменяли гражданство</label>
             </p>
 
-            ниже будет script. скоро
+            ниже будет script.
 
 
             <p><label for="passport">Паспорт</label><input type="text" name="passport" placeholder= "Номер и серия" required>
@@ -67,16 +62,14 @@
 
             <p><label for="inn">Индивидуальный номер налогоплательщика</label><input type="text" id="inn" name="inn" placeholder="ИНН" required></p>
 
-            <p><label for="foreign passport">Наличие иностранного паспорта</label><select id="foreign passport" name="foreign passport">
+            <p><label for="foreign passport">Наличие иностранного паспорта</label><select id="foreign_passport" name="foreign_passport">
                 <option value="no">Нет иностранного паспорта</option>
                 <option value="yes">Есть иностранный паспорт</option>
                 </select>
-                need script
-                <label for="foreign passport country">Страна</label><input type="text" id="foreign passport country" name="foreign passport country">
-                <label for="foreign passport num">Номер и серия</label><input type="text" id="foreign passport num" name="foreign passport num">
+                <div id="foreign_passport_inputs"></div>
             </p>
 
-            <p><table width = 600 border="1">
+            <p><table border="1">
                 <caption><p>Профессиональное образование</p></caption>
                     <thead>
                         <tr>
@@ -85,7 +78,6 @@
                             <th scope="col">Полное наименование учебного заведения</th>
                             <th scope="col">Специальность (специализация) по диплому, Квалификация по диплому, Наименования курса повышения квалификации</th>
                             <th scope="col">?Номер и дата выдачи диплома, сертификата, удостоверения?</th>
-                            <th scope="col">&nbsp;</th>
                         </tr>
                     </thead>
                     <tbody id="dynamic_1">
@@ -94,20 +86,20 @@
                             <td><input type="date" name="date end educatioin"></td>
                             <td><input type="text" name="educational institution"></td>
                             <td><input type="text" name="speciality"></td>
-                            <td><input type="text" name="?Номер и дата?"></td>
-                            <td>
-                                <button type="button" class="add">+</button>
-                                <button type="button" class="del">-</button>
-                            </td>
+                            <td><input type="text" name="number_and_date_diplom"></td>
                         </tr>
                     </tbody>
+                    <tr>
+                        <td><button type="button" id="add_1">Добавить</button></td>
+                        <td><button type="button" id="del_1">Удалить</button></td>
+                    </tr>
                 </table>
             </p>
 
             <p><label for="title">Ученая степень, ученое звание</label><input type="text" id="title" name="title"></p>
 
             <p>
-                <table width=600 border="1">
+                <table border="1">
                     <caption><p>Выполняемая работа с начала трудовой деятельности (включая учебу в высших и средних специальных учебных заведениях, военную службу, работу по совместительству, предпринимательскую деятельность и т.п.)
                     <br><h6>При заполнении данного пункта необходимо именовать учреждения, организации и предприятия так, как они назывались в свое время, военную службу записывать с указанием должности и номера воинской части.   
                     </h6></p></caption>
@@ -117,60 +109,63 @@
                             <th scope="col">Дата окончания</th>
                             <th scope="col">Должность с указанием учреждения, организации, предприятия (независимо от собственности и ведомственной принадлежности)</th>
                             <th scope="col">Местонахождение учреждения, организации, предприятия</th>
-                            <th scope="col">&nbsp;</th>
                         </tr>
                     </thead>
                     <tbody id="dynamic_2">
                         <tr>
-                            <td><input type="date" name="date start work"></td>
-                            <td><input type="date" name="date ebd work"></td>
-                            <td><input type="text" name="job title"></td>
-                            <td><input type="text" name="work place">
-                            </td>
-                            <td>
-                                <button type="button" class="add">+</button>
-                                <button type="button" class="del">-</button>
-                            </td>
+                            <td><input type="date" name="date_start_work"></td>
+                            <td><input type="date" name="date_end_work"></td>
+                            <td><input type="text" name="job_title"></td>
+                            <td><input type="text" name="work_place"></td>
                         </tr>
                     </tbody>
+                    <tr>
+                        <td><button type="button" id="add_2">Добавить</button></td>
+                        <td><button type="button" id="del_2">Удалить</button></td>
+                    </tr>
                 </table>
             </p>
 
             <label for="family status">Положение в момент заполнения анкеты</label>
-                <select id="family status" name="family status">
-                <option value="registred marriage">Состою в зарегистрированном браке</option>
-                <option value="unregistred marriage">Состою в незарегистрированном браке</option>
-                <option value="officially divorced">Разведен(а) официально (развод зарегистрирован)</option>
+                <select id="family_status" name="family status">
+                <option value="registred_marriage">Состою в зарегистрированном браке</option>
+                <option value="unregistred_marriage">Состою в незарегистрированном браке</option>
+                <option value="officially_divorced">Разведен(а) официально (развод зарегистрирован)</option>
                 <option value="widower">Вдовец (вдова)</option>
-                <option value="no married">Никогда не состоял(а) в браке</option>
+                <option value="no_married">Никогда не состоял(а) в браке</option>
                 <option value="separated">Разошелся(лась)</option>
                 </select>
 
-            <p><table width = 600 border="1">
+            <p><table border="1">
                 <caption>Ваши близкие родственники (отец, мать, братья, сестры, дети, а также муж (жена), в том числе бывшие)</caption>
                     <thead>
                         <tr>
                             <th scope="col">Степень родства</th>
-                            <th scope="col">Фамилия, имя, отчество*</th>
-                            <th scope="col">?Год, место рождения?</th>
-                            <th scope="col">?Место работы, должность?</th>
+                            <th scope="col">ФИО</th>
+                            <th scope="col">Дата рождения</th>
+                            <th scope="col">Место рождения</th>
+                            <th scope="col">Место работы</th>
+                            <th scope="col">Должность</th>
                             <th scope="col">Адрес места жительства</th>
-                            <th scope="col">&nbsp;</th>
                         </tr>
                     </thead>
                     <tbody id="dynamic_3">
                         <tr>
-                            <td><input type="text" name="degree kinship"></td>
-                            <td><input type="text" name="full name relative"></label></td>
-                            <td><input type="text" name="год, место рождения родственника"></td>
-                            <td><input type="text" name="Специальность"></td>
-                            <td><input type="text" name="residential address"></td>
-                            <td>
-                                <button type="button" class="add">+</button>
-                                <button type="button" class="del">-</button>
-                            </td>
+                            <td><input type="text" name="degree_kinship"></td>
+                            <td><input type="text" name="full_name_relative"></label></td>
+                            <td><input type="text" name="year_birth_relative"></td>
+                            <td><input type="text" name="place_birth_relative"></td>
+                            <td><input type="text" name="place_work"></td>
+                            <td><input type="text" name="job"></td>
+                            <td><input type="text" name="residential_address"></td>
                         </tr>
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td><button type="button" id="add_3">Добавить</button></td>
+                            <td><button type="button" id="del_3">Удалить</button></td>
+                        </tr>
+                    </tfoot>
                 </table></p>
 
                 <br><br><br><br><br>НЕОБЯЗАТЕЛЬНО<br><br><br><br><br><br><br><br><br><br>
@@ -214,11 +209,12 @@
 
             
             <legend>В каких социальных сетях имеются аккаунты</legend>
-            <label><input type="checkbox" id="Одноклассники" name="соцсеть" value="Одноклассники" checked />Одноклассники</label>
-            <label><input type="checkbox" id="Вконтакте" name="соцсеть" value="Вконтакте" />Вконтакте</label>
-            <label><input type="checkbox" id="Не имею" name="соцсеть" value="Не имею" />Не имею</label>
-            <label><input type="checkbox" id="Другие соцсети" name="соцсеть" value="Другие соцсети" /><input type="text" name="другая соцсеть" placeholder="Другое"></label>
-        
+            <label><input type="checkbox" id="odnoclassniki" name="network" value="odnoclassniki" checked />Одноклассники</label>
+            <label><input type="checkbox" id="vkontakte" name="network" value="vkontakte" />Вконтакте</label>
+            <label><input type="checkbox" id="no_social_network" name="network" value="no_social_network" />Не имею</label>
+            <label><input type="checkbox" id="other_social_network" name="network" value="other_social_network" />Другое
+            <div id="other_social_network_inputs"></div></label>
+
             <p><label><input type="checkbox" id = "подтверждение" name="" required/>Я подтверждаю, что все указанные мною в настоящей анкете сведения полны и соответствуют действительности.
             Мне известно, что заведомо ложные сведения, сообщенные о себе в анкете, могут повлечь отказ в трудоустройстве либо расторжение трудового договора.
             На проведение в отношении меня проверочных мероприятий согласен(а). 
@@ -228,10 +224,17 @@
             <input name="sub" type="submit" value="Сохранить" style="margin: 20px">
         </form>
         <script src="dynamictable.js"></script>
+        <script src="handler.js"></script>
         <script>
-            new DynamicTable( document.getElementById("dynamic_1") );
-            new DynamicTable( document.getElementById("dynamic_2") );
-            new DynamicTable( document.getElementById("dynamic_3") );
+            btn_add_1 = document.getElementById("add_1");
+            btn_add_2 = document.getElementById("add_2");
+            btn_add_3 = document.getElementById("add_3");
+            btn_del_1 = document.getElementById("del_1");
+            btn_del_2 = document.getElementById("del_2");
+            btn_del_3 = document.getElementById("del_3");
+            new DynamicTable(btn_add_1, btn_del_1, document.getElementById("dynamic_1"));
+            new DynamicTable(btn_add_2, btn_del_2, document.getElementById("dynamic_2"));
+            new DynamicTable(btn_add_3, btn_del_3, document.getElementById("dynamic_3"));
         </script>
     </body>
 </html>
