@@ -2,7 +2,6 @@
 var DynamicTable = (function (GLOB){
     var RID=0;
     return function(btn_add, btn_del, tBody){
-
         btn_add.onclick = function(e) {
             _addRow(tBody.rows[0], tBody);
         };
