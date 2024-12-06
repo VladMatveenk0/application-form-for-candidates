@@ -82,11 +82,11 @@
                     </thead>
                     <tbody id="dynamic_1">
                         <tr>
-                            <td><input type="date" name="data start education"></td>
-                            <td><input type="date" name="date end educatioin"></td>
-                            <td><input type="text" name="educational institution"></td>
-                            <td><input type="text" name="speciality"></td>
-                            <td><input type="text" name="number_and_date_diplom"></td>
+                            <td><input type="date" name="data start education" class="input_table"></td>
+                            <td><input type="date" name="date end educatioin" class="input_table"></td>
+                            <td><input type="text" name="educational institution" class="input_table"></td>
+                            <td><input type="text" name="speciality" class="input_table"></td>
+                            <td><input type="text" name="number_and_date_diplom" class="input_table"></td>
                         </tr>
                     </tbody>
                     <tr>
@@ -113,10 +113,10 @@
                     </thead>
                     <tbody id="dynamic_2">
                         <tr>
-                            <td><input type="date" name="date_start_work"></td>
-                            <td><input type="date" name="date_end_work"></td>
-                            <td><input type="text" name="job_title"></td>
-                            <td><input type="text" name="work_place"></td>
+                            <td><input type="date" name="date_start_work" class="input_table"></td>
+                            <td><input type="date" name="date_end_work" class="input_table"></td>
+                            <td><input type="text" name="job_title" class="input_table"></td>
+                            <td><input type="text" name="work_place" class="input_table"></td>
                         </tr>
                     </tbody>
                     <tr>
@@ -151,13 +151,23 @@
                     </thead>
                     <tbody id="dynamic_3">
                         <tr>
-                            <td><input type="text" name="degree_kinship"></td>
-                            <td><input type="text" name="full_name_relative"></label></td>
-                            <td><input type="text" name="year_birth_relative"></td>
-                            <td><input type="text" name="place_birth_relative"></td>
-                            <td><input type="text" name="place_work"></td>
-                            <td><input type="text" name="job"></td>
-                            <td><input type="text" name="residential_address"></td>
+                            <td><select id="degree_kinship" name="degree_kinship">
+                                <option value="father">Отец</option>
+                                <option value="mother">Мать</option>
+                                <option value="brother">Брат</option>
+                                <option value="sister">Сестра</option>
+                                <option value="son">Сын</option>
+                                <option value="daughter">Дочь</option>
+                                <option value="husband">Муж</option>
+                                <option value="wife">Жена</option>
+                                </select>
+                            </td>
+                            <td><input type="text" name="full_name_relative" class="input_table"></label></td>
+                            <td><input type="text" name="year_birth_relative" class="input_table"></td>
+                            <td><input type="text" name="place_birth_relative" class="input_table"></td>
+                            <td><input type="text" name="place_work" class="input_table"></td>
+                            <td><input type="text" name="job" class="input_table"></td>
+                            <td><input type="text" name="residential_address" class="input_table"></td>
                         </tr>
                     </tbody>
                     <tfoot>
