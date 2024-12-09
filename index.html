@@ -18,12 +18,12 @@
                 <div id="fullname_changed_inputs"></div>
             </p>
 
-            <p><label for="date_birth">Дата рождения</label><input type="date" name="data_birth" placeholder="" min="1925-01-01"  required></p>
+            <p><label for="date_birth">Дата рождения</label><input type="date" name="data_birth" placeholder="" min="1900-01-01"  required></p>
             <p><label for="place_birth">Место рождения</label><input type="text" name="place_birth" placeholder= "" required>
                 <br>(село, деревня, город, район, область, край, республика)</p>
 
             <p><label for="mail">Адрес электронной почты</label><input type="email" id="mail" name = "mail" placeholder="" required></p>
-            <p><label for="phone">Номер телефона</label><input type="number" id="phone" name="phone" placeholder="" required></p>
+            <p><label for="phone">Номер телефона</label><input type="number" id="phone" name="phone" placeholder="" required ></p>
 
             <p><label for="of address">Адрес по месту регистрации <br>(индекс, область, район, город, село, деревня, улица, дом, корпус, квартира)</label>
                 <input type="text" id="off_address" name="off_address" required>
@@ -150,7 +150,7 @@
                             </select>
                         </td>
                         <td><input type="text" name="full_name_relative" class="input_table"></label></td>
-                        <td><input type="number" name="year_birth_relative" class="input_table"></td>
+                        <td><input type="number" name="year_birth_relative" class="input_table" pattern="[12][0-9]{3}"></td>
                         <td><input type="text" name="place_birth_relative" class="input_table"></td>
                         <td><input type="text" name="place_work" class="input_table"></td>
                         <td><input type="text" name="job" class="input_table"></td>
@@ -180,8 +180,8 @@
                 </thead>
                 <tbody id="dynamic_4">
                     <tr>
-                        <td><input type="text" name="full_name_commercial_structures_founder" class="input_table" pattern="[А-ЯЁа-яё0-9]+"></label></td>
-                        <td><input type="text" name="address_commercial_structures_founder" class="input_table"></td>
+                        <td><input type="text" name="full_name_commercial_structures_founder" class="input_table"></label></td>
+                        <td><input type="text" name="address_commercial_structures_founder" class="input_table" ></td>
                     </tr>
                 </tbody>
             </table></p>
@@ -199,7 +199,7 @@
                 </thead>
                 <tbody id="dynamic_5">
                     <tr>
-                        <td><input type="text" name="full_name_organization_stock_owner" class="input_table" pattern="[А-ЯЁа-яё0-9]+"></label></td>
+                        <td><input type="text" name="full_name_organization_stock_owner" class="input_table"></label></td>
                         <td><input type="text" name="address_organization_stock_owner" class="input_table"></td>
                     </tr>
                 </tbody>
@@ -217,7 +217,7 @@
                 </thead>
                 <tbody id="dynamic_6">
                     <tr>
-                        <td><input type="text" name="full_name_organization_affiliated_person" class="input_table" pattern="[А-ЯЁа-яё0-9]+"></label></td>
+                        <td><input type="text" name="full_name_organization_affiliated_person" class="input_table"></label></td>
                         <td><input type="text" name="address_organization_affiliated_person" class="input_table"></td>
                     </tr>
                 </tbody>

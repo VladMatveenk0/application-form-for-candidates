@@ -18,32 +18,32 @@ fullnameCheckbox.addEventListener("change", () => {
 //nation
 const nationSelect = document.querySelector("#nation");
 document.getElementById("nation_inputs").innerHTML = '\
-            <p><label for="passport">Паспорт</label><input type="text" name="passport" placeholder= "Номер и серия" required>\
-                <label for="passport_date">Когда выдан</label><input type="date" name="passport_date" required>\
+            <p><label for="passport">Паспорт</label><input type="text" name="passport" placeholder="Серия и номер" pattern="[0-9]{2}[0-9]{2}[0-9]{6}" required>\
+                <label for="passport_date">Когда выдан</label><input type="date" name="passport_date" min="1900-01-01" required>\
                 <label for="passport_place">Кем выдан</label><input type="text" name="passport_place" placeholder="" required>\
-                <label for="passport_cod">Код подразделения</label><input type="text" name="passport_cod" placeholder="" required>\
+                <label for="passport_cod">Код подразделения</label><input type="text" name="passport_cod" placeholder="000-000" pattern="[0-9]{3}-[0-9]{3}" required>\
                 <label for="snils">Номер страхового свидетельства государственного пенсионного страхования</label>\
                 <input type="text" id="snils" name="snils" placeholder="СНИЛС" required> \
-                <label for="inn">Индивидуальный номер налогоплательщика</label><input type="text" id="inn" name="inn" placeholder="ИНН" required>\
+                <label for="inn">Индивидуальный номер налогоплательщика</label><input type="text" id="inn" name="inn" placeholder="ИНН" pattern="[0-9]{12}" required>\
             </p>';
 nationSelect.addEventListener("change", (event) => {
     if (nationSelect.value == "russia") {
         document.getElementById("nation_inputs").innerHTML = '\
-            <p><label for="passport">Паспорт</label><input type="text" name="passport" placeholder= "Номер и серия" required>\
-                <label for="passport_date">Когда выдан</label><input type="date" name="passport_date" required>\
+            <p><label for="passport">Паспорт</label><input type="text" name="passport" placeholder="Серия и номер" required>\
+                <label for="passport_date">Когда выдан</label><input type="date" name="passport_date" min="1900-01-01" required>\
                 <label for="passport_place">Кем выдан</label><input type="text" name="passport_place" placeholder="" required>\
-                <label for="passport_cod">Код подразделения</label><input type="text" name="passport_cod" placeholder="" required>\
+                <label for="passport_cod">Код подразделения</label><input type="text" name="passport_cod" placeholder="000-000" pattern="[0-9]{3}-[0-9]{3}" required>\
                 <label for="snils">Номер страхового свидетельства государственного пенсионного страхования</label>\
                 <input type="text" id="snils" name="snils" placeholder="СНИЛС" required> \
                 <label for="inn">Индивидуальный номер налогоплательщика</label><input type="text" id="inn" name="inn" placeholder="ИНН" required>\
             </p>';
     } else {
         document.getElementById("nation_inputs").innerHTML = '\
-            <p><label for="passport_seria">Паспорт</label><input type="text" name="passport_seria" placeholder= "Серия">\
-                <label for="passport_number"></label><input type="text" name="passport_number" placeholder= "Номер" required>\
-                <label for="passport_date">Когда выдан</label><input type="date" name="passport_date" required>\
+            <p><label for="passport_seria">Паспорт</label><input type="text" name="passport_seria" placeholder="Серия" pattern="[0-9]{2}[0-9]{2}">\
+                <label for="passport_number"></label><input type="text" name="passport_number" placeholder= "Номер" pattern="[0-9]{6}" required>\
+                <label for="passport_date">Когда выдан</label><input type="date" name="passport_date" min="1900-01-01" required>\
                 <label for="passport_place">Кем выдан</label><input type="text" name="passport_place" placeholder="" required>\
-                <label for="inn">Индивидуальный номер налогоплательщика</label><input type="text" id="inn" name="inn" placeholder="ИНН">\
+                <label for="inn">Индивидуальный номер налогоплательщика</label><input type="text" id="inn" name="inn" pattern="[0-9]{12}" placeholder="ИНН">\
             </p>';
     }
 });
