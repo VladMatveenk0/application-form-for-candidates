@@ -11,23 +11,24 @@
     <body>
         <center><h1>Анкета</h1></Center>
         <form action="process.php" method="post">
-            <p><label for="second_name">Фамилия</label><input type="text" name="second_name" placeholder="" required>
-                <label for="name">Имя</label><input type="text" name="name" placeholder="" required>
-                <label for="surname">Отчество</label><input type="text" name="surname" placeholder="">
+            <p><label for="second_name">Фамилия</label><input type="text" name="second_name" placeholder="" pattern="^[А-ЯЁа-яё]+" required>
+                <label for="name">Имя</label><input type="text" name="name" placeholder="" pattern="^[А-ЯЁа-яё]+" required>
+                <label for="surname">Отчество</label><input type="text" name="surname" placeholder="" pattern="^[А-ЯЁа-яё]+">
                 <label><input type="checkbox" id="fullname_changed" name="fullname_changed">если изменяли фамилию, имя или отчество</label>
                 <div id="fullname_changed_inputs"></div>
             </p>
 
-            <p><label for="date_birth">Дата рождения</label><input type="date" name="data_birth" placeholder="" required></p>
+            <p><label for="date_birth">Дата рождения</label><input type="date" name="data_birth" placeholder="" min="1925-01-01"  required></p>
             <p><label for="place_birth">Место рождения</label><input type="text" name="place_birth" placeholder= "" required>
                 <br>(село, деревня, город, район, область, край, республика)</p>
 
-            <p><label for="mail">Адрес эл. почты</label><input type="email" id="mail" name = "mail" placeholder="" required></p>
+            <p><label for="mail">Адрес электронной почты</label><input type="email" id="mail" name = "mail" placeholder="" required></p>
             <p><label for="phone">Номер телефона</label><input type="number" id="phone" name="phone" placeholder="" required></p>
 
-            <p><label for="of address">Адрес по месту регистрации</label><input type="text" id="off_address" name="off_address" required>
-                <label for="fact address">Адрес фактический(если отличается)</label><input type="text" id="fact_address" name="fact_address">
-                (индекс, область, район, город, село, деревня, улица, дом, корпус, квартира) + need ФАИС
+            <p><label for="of address">Адрес по месту регистрации <br>(индекс, область, район, город, село, деревня, улица, дом, корпус, квартира)</label>
+                <input type="text" id="off_address" name="off_address" required>
+                <label for="fact address">Адрес фактический (если отличается)</label><input type="text" id="fact_address" name="fact_address">
+                need ФАИС
             </p>
 
             <p><label for="nation">Гражданство</label><select id="nation" name="nation">
@@ -41,13 +42,14 @@
                 <option value="germany">ГЕРМАНИЯ</option>
                 </select>
                 <label><input type="checkbox" id="nation_changed" name="nation_changed">укажите если изменяли гражданство</label>
+                <div id="nation_changed_inputs"></div>
             </p>
 
             <div id="nation_inputs"></div>
 
-            <p><label for="zpassport">Загран паспорт</label><input type="text" name="zpassport" placeholder= "Номер и серия" required>
-                <label for="zpassport date">Когда выдан</label><input type="date" name="zpassport date" required>
-                <label for="zpassport place">Кем выдан</label><input type="text" name="zpassport place" placeholder="" required></p>
+            <p><label for="zpassport">Загранпаспорт</label><input type="text" name="zpassport" placeholder= "Номер и серия">
+                <label for="zpassport date">Когда выдан</label><input type="date" name="zpassport date">
+                <label for="zpassport place">Кем выдан</label><input type="text" name="zpassport place" placeholder=""></p>
 
             <p><label for="foreign passport">Наличие иностранного паспорта</label><select id="foreign_passport" name="foreign_passport">
                 <option value="no">Нет иностранного паспорта</option>
@@ -58,32 +60,29 @@
 
             <p><table border="1">
                 <caption><p>Профессиональное образование</p></caption>
-                    <thead>
-                        <tr>
-                            <th scope="col">Дата поступления</th>
-                            <th scope="col">Дата окончания</th>
-                            <th scope="col">Полное наименование учебного заведения</th>
-                            <th scope="col">Специальность (специализация) по диплому, Квалификация по диплому, Наименования курса повышения квалификации</th>
-                            <th scope="col">?Номер и дата выдачи диплома, сертификата, удостоверения?</th>
-                        </tr>
-                    </thead>
-                    <tbody id="dynamic_1">
-                        <tr>
-                            <td><input type="date" name="data start education" class="input_table"></td>
-                            <td><input type="date" name="date end educatioin" class="input_table"></td>
-                            <td><input type="text" name="educational institution" class="input_table"></td>
-                            <td><input type="text" name="speciality" class="input_table"></td>
-                            <td><input type="text" name="number_and_date_diplom" class="input_table"></td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td><button type="button" id="add_1">Добавить</button></td>
-                            <td><button type="button" id="del_1">Удалить</button></td>
-                        </tr>
-                    </tfoot>
-                </table>
-            </p>
+                <thead>
+                    <tr>
+                        <th scope="col">Дата поступления</th>
+                        <th scope="col">Дата окончания</th>
+                        <th scope="col">Полное наименование учебного заведения</th>
+                        <th scope="col">Специальность (специализация) по диплому, Квалификация по диплому, Наименования курса повышения квалификации</th>
+                        <th scope="col">Номер диплома, сертификата, удостоверения</th>
+                        <th scope="col">Дата выдачи диплома, сертификата, удостоверения</th>
+                    </tr>
+                </thead>
+                <tbody id="dynamic_1">
+                    <tr>
+                        <td><input type="date" name="data start education" class="input_table"></td>
+                        <td><input type="date" name="date end educatioin" class="input_table"></td>
+                        <td><input type="text" name="educational institution" class="input_table"></td>
+                        <td><input type="text" name="speciality" class="input_table"></td>
+                        <td><input type="text" name="number_diplom" class="input_table"></td>
+                        <td><input type="text" name="date_diplom" class="input_table"></td>
+                    </tr>
+                </tbody>
+            </table></p>
+                        <button type="button" id="add_1">Добавить</button>
+                        <button type="button" id="del_1">Удалить</button>
 
             <p><label for="title">Ученая степень, ученое звание</label><input type="text" id="scientific_title" name="scientific_title"></p>
 
@@ -96,7 +95,8 @@
                         <tr>
                             <th scope="col">Дата поступления</th>
                             <th scope="col">Дата окончания</th>
-                            <th scope="col">Должность с указанием учреждения, организации, предприятия (независимо от собственности и ведомственной принадлежности)</th>
+                            <th scope="col">Наименование учреждения, организации, предприятия</th>
+                            <th scope="col">Должность в учреждения, организации, предприятия (независимо от собственности и ведомственной принадлежности)</th>
                             <th scope="col">Местонахождение учреждения, организации, предприятия</th>
                         </tr>
                     </thead>
@@ -104,18 +104,14 @@
                         <tr>
                             <td><input type="date" name="date_start_work" class="input_table"></td>
                             <td><input type="date" name="date_end_work" class="input_table"></td>
+                            <td><input type="text" name="work_name" class="input_table"></td>
                             <td><input type="text" name="job_title" class="input_table"></td>
                             <td><input type="text" name="work_place" class="input_table"></td>
                         </tr>
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <td><button type="button" id="add_2">Добавить</button></td>
-                            <td><button type="button" id="del_2">Удалить</button></td>
-                        </tr>
-                    </tfoot>
-                </table>
-            </p>
+                </table></p> 
+                            <button type="button" id="add_2">Добавить</button>
+                            <button type="button" id="del_2">Удалить</button>
 
             <label for="family status">Положение в момент заполнения анкеты</label>
                 <select id="family_status" name="family status">
@@ -129,45 +125,41 @@
 
             <p><table border="1">
                 <caption>Ваши близкие родственники (отец, мать, братья, сестры, дети, а также муж (жена), в том числе бывшие)</caption>
-                    <thead>
-                        <tr>
-                            <th scope="col">Степень родства</th>
-                            <th scope="col">ФИО</th>
-                            <th scope="col">Дата рождения</th>
-                            <th scope="col">Место рождения</th>
-                            <th scope="col">Место работы</th>
-                            <th scope="col">Должность</th>
-                            <th scope="col">Адрес места жительства</th>
-                        </tr>
-                    </thead>
-                    <tbody id="dynamic_3">
-                        <tr>
-                            <td><select id="degree_kinship" name="degree_kinship">
-                                <option value="father">Отец</option>
-                                <option value="mother">Мать</option>
-                                <option value="brother">Брат</option>
-                                <option value="sister">Сестра</option>
-                                <option value="son">Сын</option>
-                                <option value="daughter">Дочь</option>
-                                <option value="husband">Муж</option>
-                                <option value="wife">Жена</option>
-                                </select>
-                            </td>
-                            <td><input type="text" name="full_name_relative" class="input_table"></label></td>
-                            <td><input type="number" name="year_birth_relative" class="input_table"></td>
-                            <td><input type="text" name="place_birth_relative" class="input_table"></td>
-                            <td><input type="text" name="place_work" class="input_table"></td>
-                            <td><input type="text" name="job" class="input_table"></td>
-                            <td><input type="text" name="residential_address" class="input_table"></td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td><button type="button" id="add_3">Добавить</button></td>
-                            <td><button type="button" id="del_3">Удалить</button></td>
-                        </tr>
-                    </tfoot>
-                </table></p>
+                <thead>
+                    <tr>
+                        <th scope="col">Степень родства</th>
+                        <th scope="col">ФИО</th>
+                        <th scope="col">Дата рождения</th>
+                        <th scope="col">Место рождения</th>
+                        <th scope="col">Место работы</th>
+                        <th scope="col">Должность</th>
+                        <th scope="col">Адрес места жительства</th>
+                    </tr>
+                </thead>
+                <tbody id="dynamic_3">
+                    <tr>
+                        <td><select id="degree_kinship" name="degree_kinship_select">
+                            <option value="husband">Муж</option>
+                            <option value="wife">Жена</option>
+                            <option value="son">Сын</option>
+                            <option value="daughter">Дочь</option>
+                            <option value="father">Отец</option>
+                            <option value="mother">Мать</option>
+                            <option value="brother">Брат</option>
+                            <option value="sister">Сестра</option>
+                            </select>
+                        </td>
+                        <td><input type="text" name="full_name_relative" class="input_table"></label></td>
+                        <td><input type="number" name="year_birth_relative" class="input_table"></td>
+                        <td><input type="text" name="place_birth_relative" class="input_table"></td>
+                        <td><input type="text" name="place_work" class="input_table"></td>
+                        <td><input type="text" name="job" class="input_table"></td>
+                        <td><input type="text" name="residential_address" class="input_table"></td>
+                    </tr>
+                </tbody>
+            </table></p>
+                        <button type="button" id="add_3">Добавить</button>
+                        <button type="button" id="del_3">Удалить</button>
     
             <p><legend>Имеются ли у Вас или жены (мужа) родственники, постоянно проживающие за границей?</legend>
             <label><input type="radio" id="foreign_relative_no" name="foreign_relative" value="no" checked />Не проживают</label>
@@ -178,20 +170,77 @@
 
             <p><label for="documents_for_benefits">Документы, дающие право на льготы</label><textarea name="documents_for_benefits" cols = 50></textarea></p>
 
-            <p><label for="founder">Полное наименование и адрес коммерческих структур, учредителем которых являетесь или являлись</label> <textarea name="founder" cols=50 rows=4></textarea></p>
+            <p><table border="1">
+                <caption>Полное наименование и адрес коммерческих структур, учредителем которых являетесь или являлись</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Полное наименование</th>
+                        <th scope="col">Адрес коммерческих структур</th>
+                    </tr>
+                </thead>
+                <tbody id="dynamic_4">
+                    <tr>
+                        <td><input type="text" name="full_name_commercial_structures_founder" class="input_table" pattern="[А-ЯЁа-яё0-9]+"></label></td>
+                        <td><input type="text" name="address_commercial_structures_founder" class="input_table"></td>
+                    </tr>
+                </tbody>
+            </table></p>
+                        <button type="button" id="add_4">Добавить</button>
+                        <button type="button" id="del_4">Удалить</button>
 
-            <p><label for="stock">Полное наименование и адрес организаций, предприятий и т.п., акциями которых владели или владеете</label> <textarea name="stock" cols=50 rows=4></textarea></p>
 
-            <p><label for="affiliated_person">Полное наименование и адрес организаций, предприятий и т.п., в которых являетесь или являлись аффилированным лицом</label> <textarea name="affiliated_person" cols=50 rows=4></textarea></p>
+            <p><table border="1">
+                <caption>Полное наименование и адрес организаций, предприятий и т.п., акциями которых владели или владеете</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Полное наименование</th>
+                        <th scope="col">Адрес организаций</th>
+                    </tr>
+                </thead>
+                <tbody id="dynamic_5">
+                    <tr>
+                        <td><input type="text" name="full_name_organization_stock_owner" class="input_table" pattern="[А-ЯЁа-яё0-9]+"></label></td>
+                        <td><input type="text" name="address_organization_stock_owner" class="input_table"></td>
+                    </tr>
+                </tbody>
+            </table></p>
+                        <button type="button" id="add_5">Добавить</button>
+                        <button type="button" id="del_5">Удалить</button>
+
+            <p><table border="1">
+                <caption>Полное наименование и адрес организаций, предприятий и т.п., в которых являетесь или являлись аффилированным лицом</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Полное наименование</th>
+                        <th scope="col">Адрес организаций</th>
+                    </tr>
+                </thead>
+                <tbody id="dynamic_6">
+                    <tr>
+                        <td><input type="text" name="full_name_organization_affiliated_person" class="input_table" pattern="[А-ЯЁа-яё0-9]+"></label></td>
+                        <td><input type="text" name="address_organization_affiliated_person" class="input_table"></td>
+                    </tr>
+                </tbody>
+                </table></p>
+                        <button type="button" id="add_6">Добавить</button>
+                        <button type="button" id="del_6">Удалить</button>
 
             <p><legend>Наличие судимости</legend>
-                <label><input type="radio" id="criminal_record_1" name="criminal_record" value="no" checked />Нет</label>
-                <label><input type="radio" id="criminal_record_2" name="criminal_record" value="yes" />Да</label>
+                <label><input type="radio" id="criminal_record_no" name="criminal_record" value="no" checked />Нет</label>
+                <label><input type="radio" id="criminal_record_yes" name="criminal_record" value="yes" />Да</label>
                 <div id="criminal_record_inputs"></div>
             </p>
 
             <p><label for="source_info_work">Источник получения информации о данном месте работы</label>
-                <input type="text" name="source_info_work" placeholder="" required></p>
+                <select name="source_info_work" id="source_info_work">
+                    <option value="source_info_work_sites">hh.ru или другие работные сайты</option>
+                    <option value="source_info_work_social_network">соцсети</option>
+                    <option value="source_info_work_ad">реклама</option>
+                    <option value="source_info_work_recomendation">рекомендации друзей, знакомых</option>
+                    <option value="other_source_info_work">Другое</option>
+                </select>
+                </p>
+                <div id="other_source_info_work_inputs"></div>
 
             <p><label for="info_work">Сведения о рекомендателях (при наличии) (Ф.И.О., должность и место работы, телефон)</label>
                 <textarea name="info_work" cols=30 rows=3></textarea></p>
@@ -218,7 +267,7 @@
             При изменении любых анкетных данных обязуюсь в 3-х дневный срок сообщить в подразделение по управлению персоналом новые сведения. 
             </label></p>
 
-            <input type="submit" style="margin: 20px">
+            <input type="submit" onclick="date_checker.js" style="margin: 20px">
         </form>
         <script src="dynamictable.js"></script>
         <script src="handler.js"></script>
@@ -226,12 +275,21 @@
             btn_add_1 = document.getElementById("add_1");
             btn_add_2 = document.getElementById("add_2");
             btn_add_3 = document.getElementById("add_3");
+            btn_add_4 = document.getElementById("add_4");
+            btn_add_5 = document.getElementById("add_5");
+            btn_add_6 = document.getElementById("add_6");
             btn_del_1 = document.getElementById("del_1");
             btn_del_2 = document.getElementById("del_2");
             btn_del_3 = document.getElementById("del_3");
+            btn_del_4 = document.getElementById("del_4");
+            btn_del_5 = document.getElementById("del_5");
+            btn_del_6 = document.getElementById("del_6");
             new DynamicTable(btn_add_1, btn_del_1, document.getElementById("dynamic_1"));
             new DynamicTable(btn_add_2, btn_del_2, document.getElementById("dynamic_2"));
             new DynamicTable(btn_add_3, btn_del_3, document.getElementById("dynamic_3"));
+            new DynamicTable(btn_add_4, btn_del_4, document.getElementById("dynamic_4"));
+            new DynamicTable(btn_add_5, btn_del_5, document.getElementById("dynamic_5"));
+            new DynamicTable(btn_add_6, btn_del_6, document.getElementById("dynamic_6"));
         </script>
     </body>
 </html>

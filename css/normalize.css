@@ -11,7 +11,7 @@
   }
   
   form {
-    max-width: 800px;
+    max-width: 850px;
     margin: 50px auto;
     padding: 16px;
     border: 1px solid #eaeaea;
@@ -38,7 +38,7 @@
     padding: 8px 10px;
     height: 48px;
     width: 100%;
-    max-width: 750px;
+    max-width: 800px;
     color: #8a97a0;
     box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
     margin-bottom: 16px;
@@ -82,6 +82,7 @@
     border: 1px solid #0f868c;
     text-align: center;
     width: 100%;
+    max-width: 120px;
   }
   
   fieldset {
@@ -109,5 +110,6 @@
   }
 
   table {
-    max-width: 750px;
+    max-width: 800px;
+    width: 100%;
   }

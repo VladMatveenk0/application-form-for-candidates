@@ -1,5 +1,5 @@
 
-var DynamicTable = (function (GLOB){
+var DynamicTable = (function (){
     var RID=0;
     return function(btn_add, btn_del, tBody){
         btn_add.onclick = function(e) {
