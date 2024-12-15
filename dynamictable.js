@@ -1,12 +1,12 @@
 
-var DynamicTable = (function (){
-    var RID=0;
-    return function(btn_add, btn_del, tBody){
-        btn_add.onclick = function(e) {
+var DynamicTable = (function () {
+    var RID = 0;
+    return function (btn_add, btn_del, tBody) {
+        btn_add.onclick = function (e) {
             _addRow(tBody.rows[0], tBody);
         };
 
-        btn_del.onclick = function(e) {
+        btn_del.onclick = function (e) {
             tBody.rows.length > 1 && _delRow(tBody.rows[tBody.rows.length - 1], tBody);
         }
 
@@ -14,13 +14,13 @@ var DynamicTable = (function (){
             var elements = row.getElementsByTagName("*");
             for (var i = 0; i < elements.length; i += 1) {
                 if (elements.item(i).name) {
-                    elements.item(i).name = RID + "["+ elements.item(i).name +"]";
+                    elements.item(i).name = RID + "[" + elements.item(i).name + "]";
                 }
             }
             RID++;
-            return row;        
+            return row;
         };
-    
+
         var _rowTpl = tBody.rows[0].cloneNode(true);
 
         var _addRow = function (before, tBody) {
