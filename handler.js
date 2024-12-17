@@ -18,7 +18,8 @@ fullnameCheckbox.addEventListener("change", () => {
 //nation
 const nationSelect = document.querySelector("#nation");
 document.getElementById("nation_inputs").innerHTML = '\
-            <p><label for="passport">Паспорт</label><input type="text" name="passport" placeholder="Серия и номер" pattern="[0-9]{2}[0-9]{2}[0-9]{6}" required>\
+            <p><label for="passport_seria">Паспорт</label><input type="text" name="passport_seria" placeholder="Серия" pattern="[0-9]{2}[0-9]{2}" required>\
+                <label for="passport_number"></label><input type="text" name="passport_number" placeholder="Номер" pattern="[0-9]{6}" required>\
                 <label for="passport_date">Когда выдан</label><input type="date" name="passport_date" min="1900-01-01" required>\
                 <label for="passport_place">Кем выдан</label><input type="text" name="passport_place" placeholder="" required>\
                 <label for="passport_cod">Код подразделения</label><input type="text" name="passport_cod" placeholder="000-000" pattern="[0-9]{3}-[0-9]{3}" required>\
@@ -37,7 +38,8 @@ document.getElementById("nation_inputs").innerHTML = '\
 nationSelect.addEventListener("change", (event) => {
     if (nationSelect.value == "russia") {
         document.getElementById("nation_inputs").innerHTML = '\
-            <p><label for="passport">Паспорт</label><input type="text" name="passport" placeholder="Серия и номер" pattern="[0-9]{2}[0-9]{2}[0-9]{6}" required>\
+            <p><label for="passport_seria">Паспорт</label><input type="text" name="passport_seria" placeholder="Серия" pattern="[0-9]{2}[0-9]{2}" required>\
+                <label for="passport_number"></label><input type="text" name="passport_number" placeholder="Номер" pattern="[0-9]{6}" required>\
                 <label for="passport_date">Когда выдан</label><input type="date" name="passport_date" min="1900-01-01" required>\
                 <label for="passport_place">Кем выдан</label><input type="text" name="passport_place" placeholder="" required>\
                 <label for="passport_cod">Код подразделения</label><input type="text" name="passport_cod" placeholder="000-000" pattern="[0-9]{3}-[0-9]{3}" required>\
@@ -168,53 +170,56 @@ other_social_networkCheckbox.addEventListener("change", () => {
     }
 });
 
-//max_size file
-
-function checkFileSize(input) {
-    if (input.files[0].size > 20 * 1024 * 1024) { // Ограничение размера до 20 МБ
-        alert('Превышен допустимый вес. Уменьшите размер файла.');
-        input.value = ''; // Запрещаем загрузку слишком больших файлов
-    }
-}
-
 // file logic
-let lst_files_skan = [];
+let fileList = [];
+const MAX_FILE_SIZE = 5 * 1024 * 1024; // Максимальный размер файла 5 МБ
 
-function add_lst_files_skan(input) {
-    if (input.files[0].size > 5 * 1024 * 1024) { // Ограничение размера до 5МБ
-        input.value = "";
-        alert('Превышен допустимый вес. Уменьшите размер файла.');
-    } else {
-        lst_files_skan.push(input.files[0]);
-        input.value = "";
-        pokaz_files(lst_files_skan);
+function handleFiles(files) {
+    for (let i = 0; i < files.length; i++) {
+        if (files[i].size > MAX_FILE_SIZE) {
+            errorMessageDiv.innerHTML += `<p>Файл "${files[i].name}" превышает максимальный размер 5 МБ и не будет добавлен.</p>`;
+        } else {
+            fileList.push(files[i]);
+        }
     }
+    displayFiles();
+    updateFileListInput(); // Обновляем скрытое поле
 }
 
-function pokaz_files(lst) {
-    const div_skan_files_pokaz = document.querySelector("#skan_files_pokaz");
-    str_files = "";
-    for (let i = 0; i < lst.length; i++) {
-        str_files += "\n<p>" + lst[i].name + "</p>";
-        //console.log(lst[i].name);
-    }
-    str_files += "\n";
-    div_skan_files_pokaz.innerHTML = str_files;
+function updateFileListInput() {
+    const fileNames = fileList.map(file => file.name); // Получаем имена файлов
+    document.getElementById('file_list_input').value = JSON.stringify(fileNames); // Записываем в скрытое поле
 }
 
-function rezet_files() {
-    lst_files_skan = [];
-    pokaz_files(lst_files_skan);
+function displayFiles() {
+    const fileListDiv = document.getElementById('file_list');
+    fileListDiv.innerHTML = ''; // Очищаем предыдущий список файлов
+
+    fileList.forEach((file, index) => {
+        const fileItem = document.createElement('div');
+        fileItem.className = 'file-item';
+        fileItem.innerHTML = `
+                    <span>${file.name}</span>
+                    <span class="remove-file" onclick="removeFile(${index})">Удалить</span>
+                `;
+        fileListDiv.appendChild(fileItem);
+    });
 }
 
-function load_files(event) {
-    skan_files = document.getElementById("skan_files");
-    console.log(skan_files);
-    if (lst_files_skan.length > 0) {
-        const dataTransfer = new DataTransfer();
-        Array.from(lst_files_skan).forEach(f => dataTransfer.items.add(f))
-        skan_files.files = dataTransfer.files;
-    }
+function removeFile(index) {
+    fileList.splice(index, 1); // Удаляем файл из массива
+    displayFiles(); // Обновляем отображение файлов
 }
 
+// Функция для получения параметров из URL
+function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+}
+
+// Получаем id из URL
+const id = getQueryParam('id');
+if (id) {
+    document.getElementById("id").value = id; // Устанавливаем значение в скрытое поле
+}
 
