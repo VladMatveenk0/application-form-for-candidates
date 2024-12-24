@@ -1,1 +1,12 @@
 AddDefaultCharset UTF-8
+# Включение модуля перезаписи URL
+RewriteEngine On
+
+# Исключение для process.php
+RewriteRule ^process\.php$ - [L]
+
+# Перенаправление с HTTP на HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Другие правила...

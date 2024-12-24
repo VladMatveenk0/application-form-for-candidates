@@ -172,25 +172,16 @@ other_social_networkCheckbox.addEventListener("change", () => {
 
 // file logic
 let fileList = [];
-const MAX_FILE_SIZE = 5 * 1024 * 1024; // Максимальный размер файла 5 МБ
 
+// Функция для обработки загруженных файлов
 function handleFiles(files) {
     for (let i = 0; i < files.length; i++) {
-        if (files[i].size > MAX_FILE_SIZE) {
-            errorMessageDiv.innerHTML += `<p>Файл "${files[i].name}" превышает максимальный размер 5 МБ и не будет добавлен.</p>`;
-        } else {
-            fileList.push(files[i]);
-        }
+        fileList.push(files[i]);
     }
     displayFiles();
-    updateFileListInput(); // Обновляем скрытое поле
 }
 
-function updateFileListInput() {
-    const fileNames = fileList.map(file => file.name); // Получаем имена файлов
-    document.getElementById('file_list_input').value = JSON.stringify(fileNames); // Записываем в скрытое поле
-}
-
+// Функция для отображения загруженных файлов
 function displayFiles() {
     const fileListDiv = document.getElementById('file_list');
     fileListDiv.innerHTML = ''; // Очищаем предыдущий список файлов
@@ -199,27 +190,44 @@ function displayFiles() {
         const fileItem = document.createElement('div');
         fileItem.className = 'file-item';
         fileItem.innerHTML = `
-                    <span>${file.name}</span>
-                    <span class="remove-file" onclick="removeFile(${index})">Удалить</span>
-                `;
+            <span>${file.name}</span>
+            <span class="remove-file" onclick="removeFile(${index})">Удалить</span>
+        `;
         fileListDiv.appendChild(fileItem);
     });
 }
 
+// Функция для удаления файла из списка
 function removeFile(index) {
     fileList.splice(index, 1); // Удаляем файл из массива
     displayFiles(); // Обновляем отображение файлов
 }
 
-// Функция для получения параметров из URL
-function getQueryParam(param) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(param);
-}
+// Обработка отправки формы
+document.getElementById('uploadForm').onsubmit = function(event) {
+    event.preventDefault(); // Предотвращаем стандартное поведение формы
 
-// Получаем id из URL
-const id = getQueryParam('id');
-if (id) {
-    document.getElementById("id").value = id; // Устанавливаем значение в скрытое поле
-}
+    const formData = new FormData(this);
+    
+    // Добавляем файлы в FormData
+    fileList.forEach(file => {
+        formData.append('file_list[]', file);
+    });
+    
+    for (let [key, value] of formData.entries()) {
+        console.log(`${key}: ${value}`); // Выводим содержимое formData в консоль
+    }
+    // Отправляем данные на сервер
+    fetch('process.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data); // Обработка ответа от сервера
+    })
+    .catch(error => {
+        console.error('Ошибка:', error);
+    });
+};
 

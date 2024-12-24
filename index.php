@@ -14,8 +14,12 @@
     <center>
         <h1>Анкета</h1>
     </Center>
-    <form action="process.php" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="id" id="id" style="display: none;">
+    <?php
+    // Получаем id из URL
+    $id = isset($_GET['id']) ? $_GET['id'] : null; // Если id не передан, установите null
+    ?>
+    <form id="uploadForm" action="process.php" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="<?php echo htmlspecialchars($id); ?>"> <!-- Скрытое поле для id -->
         <p><label for="second_name">Фамилия</label><input type="text" name="second_name" placeholder=""
                 pattern="^[А-ЯЁа-яёA-Za-z]+" required>
             <label for="name">Имя</label><input type="text" name="name" placeholder="" pattern="^[А-ЯЁа-яёA-Za-z]+"
@@ -391,15 +395,14 @@
         <p>
         <div class="file-upload-area" onclick="document.getElementById('file_input').click();">
             Нажмите здесь, чтобы загрузить файлы
-            <input type="file" id="file_input" multiple onchange="handleFiles(this.files)">
+            <input type="file" name="file_list[]" id="file_input" multiple onchange="handleFiles(this.files)">
         </div>
         </p>
 
         <p>
         <div id="file_list"></div>
+        <div id="errorMessageDiv"></div>
         </p>
-
-        <input type="hidden" name="file_list[]" id="file_list_input">
 
         <p><label><input type="checkbox" id="confirm" name="confirm" required />Я подтверждаю, что все указанные мною в
                 настоящей анкете сведения полны и соответствуют действительности.
