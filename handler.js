@@ -18,14 +18,14 @@ fullnameCheckbox.addEventListener("change", () => {
 //nation
 const nationSelect = document.querySelector("#nation");
 document.getElementById("nation_inputs").innerHTML = '\
-            <p><label for="passport_seria">Паспорт</label><input type="text" name="passport_seria" placeholder="Серия" pattern="[0-9]{2}[0-9]{2}" required>\
-                <label for="passport_number"></label><input type="text" name="passport_number" placeholder="Номер" pattern="[0-9]{6}" required>\
+            <p><label>Паспорт</label><input type="text" name="passport_seria" placeholder="Серия" pattern="[0-9]{2}[0-9]{2}"  required>\
+                <input type="text" name="passport_number" placeholder="Номер" pattern="[0-9]{6}"  required>\
                 <label for="passport_date">Когда выдан</label><input type="date" name="passport_date" min="1900-01-01" required>\
                 <label for="passport_place">Кем выдан</label><input type="text" name="passport_place" placeholder="" required>\
                 <label for="passport_cod">Код подразделения</label><input type="text" name="passport_cod" placeholder="000-000" pattern="[0-9]{3}-[0-9]{3}" required>\
                 <label for="snils">Номер страхового свидетельства государственного пенсионного страхования</label>\
-                <input type="text" id="snils" name="snils" placeholder="СНИЛС" required> \
-                <label for="inn">Индивидуальный номер налогоплательщика</label><input type="text" id="inn" name="inn" placeholder="ИНН" pattern="[0-9]{12}" required></p>\
+                <input type="text" id="snils" name="snils" pattern="[0-9]{3}-[0-9]{3}-[0-9]{5}" placeholder="СНИЛС: 000-000-00000" required> \
+                <label for="inn">Индивидуальный номер налогоплательщика</label><input type="text" id="inn" name="inn" placeholder="ИНН: 000000000000" pattern="[0-9]{12}" required></p>\
                 <p><label for="zpassport">Загранпаспорт</label><input type="text" name="zpassport" placeholder= "Номер и серия">\
                 <label for="zpassport date">Когда выдан</label><input type="date" name="zpassport date">\
                 <label for="zpassport place">Кем выдан</label><input type="text" name="zpassport place" placeholder=""></p>\
@@ -38,14 +38,14 @@ document.getElementById("nation_inputs").innerHTML = '\
 nationSelect.addEventListener("change", (event) => {
     if (nationSelect.value == "russia") {
         document.getElementById("nation_inputs").innerHTML = '\
-            <p><label for="passport_seria">Паспорт</label><input type="text" name="passport_seria" placeholder="Серия" pattern="[0-9]{2}[0-9]{2}" required>\
-                <label for="passport_number"></label><input type="text" name="passport_number" placeholder="Номер" pattern="[0-9]{6}" required>\
+            <p><label>Паспорт</label><input type="text" name="passport_seria" placeholder="Серия" pattern="[0-9]{2}[0-9]{2}" required>\
+                <input type="text" name="passport_number" placeholder="Номер" pattern="[0-9]{6}" required>\
                 <label for="passport_date">Когда выдан</label><input type="date" name="passport_date" min="1900-01-01" required>\
                 <label for="passport_place">Кем выдан</label><input type="text" name="passport_place" placeholder="" required>\
                 <label for="passport_cod">Код подразделения</label><input type="text" name="passport_cod" placeholder="000-000" pattern="[0-9]{3}-[0-9]{3}" required>\
                 <label for="snils">Номер страхового свидетельства государственного пенсионного страхования</label>\
-                <input type="text" id="snils" name="snils" placeholder="СНИЛС" required> \
-                <label for="inn">Индивидуальный номер налогоплательщика</label><input type="text" id="inn" name="inn" placeholder="ИНН" required></p>\
+                <input type="text" id="snils" name="snils" pattern="[0-9]{3}-[0-9]{3}-[0-9]{5}" placeholder="СНИЛС: 000-000-00000" required> \
+                <label for="inn">Индивидуальный номер налогоплательщика</label><input type="text" id="inn" name="inn" placeholder="ИНН: 000000000000" pattern="[0-9]{12}" required></p>\
                 <p><label for="zpassport">Загранпаспорт</label><input type="text" name="zpassport" placeholder= "Номер и серия">\
                 <label for="zpassport date">Когда выдан</label><input type="date" name="zpassport date">\
                 <label for="zpassport place">Кем выдан</label><input type="text" name="zpassport place" placeholder=""></p>\
@@ -57,11 +57,12 @@ nationSelect.addEventListener("change", (event) => {
             </p>';
     } else {
         document.getElementById("nation_inputs").innerHTML = '\
-            <p><label for="passport_seria">Паспорт</label><input type="text" name="passport_seria" placeholder="Серия" pattern="[0-9]{2}[0-9]{2}">\
-                <label for="passport_number"></label><input type="text" name="passport_number" placeholder= "Номер" pattern="[0-9]{6}" required>\
+            <p><label>Паспорт</label><input type="text" name="passport_seria" placeholder="Серия" pattern="[0-9]{2}[0-9]{2}" required>\
+                <input type="text" name="passport_number" placeholder="Номер" pattern="[0-9]{6}" required>\
                 <label for="passport_date">Когда выдан</label><input type="date" name="passport_date" min="1900-01-01" required>\
                 <label for="passport_place">Кем выдан</label><input type="text" name="passport_place" placeholder="" required>\
-                <label for="inn">Индивидуальный номер налогоплательщика</label><input type="text" id="inn" name="inn" pattern="[0-9]{12}" placeholder="ИНН">\
+                <input type="text" id="snils" name="snils" pattern="[0-9]{3}-[0-9]{3}-[0-9]{5}" placeholder="СНИЛС: 000-000-00000"> \
+                <label for="inn">Индивидуальный номер налогоплательщика</label><input type="text" id="inn" name="inn" pattern="[0-9]{12}" placeholder="ИНН: 000000000000">\
             </p>';
     }
 });
@@ -209,25 +210,23 @@ document.getElementById('uploadForm').onsubmit = function(event) {
 
     const formData = new FormData(this);
     
-    // Добавляем файлы в FormData
-    fileList.forEach(file => {
-        formData.append('file_list[]', file);
-    });
-    
-    for (let [key, value] of formData.entries()) {
-        console.log(`${key}: ${value}`); // Выводим содержимое formData в консоль
-    }
     // Отправляем данные на сервер
     fetch('process.php', {
         method: 'POST',
         body: formData
     })
-    .then(response => response.text())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Сетевая ошибка: ' + response.status);
+        }
+        return response.text();
+    })
     .then(data => {
         console.log(data); // Обработка ответа от сервера
+        window.location.href = 'index_2.html'; // Перенаправление на другую страницу
     })
     .catch(error => {
         console.error('Ошибка:', error);
+        alert('Произошла ошибка при отправке формы. Пожалуйста, попробуйте позже.');
     });
 };
-

@@ -19,7 +19,6 @@ $name = isset($_POST['name']) ? $_POST['name'] : '';
 $surname = isset($_POST['surname']) ? $_POST['surname'] : '';
 $id = isset($_POST['id']) ? $_POST['id'] : 0; // Если id не передан, установите null
 
-
 // Преобразование массива в JSON
 $jsonData = json_encode($_POST);
 
@@ -31,7 +30,7 @@ if ($stmt === false) {
 
 // Установка значений
 $fullName = $secondName . ' ' . $name . ' ' . $surname;
-$stmt->bind_param("iss", $id, $fullName, $jsonData);
+$stmt->bind_param("sss", $id, $fullName, $jsonData);
 
 // Выполнение запроса
 if ($stmt->execute()) {

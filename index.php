@@ -7,7 +7,6 @@
     <title>Анкета кандидата</title>
     <link rel="stylesheet" href="css/normalize.css">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
-    <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
@@ -20,7 +19,7 @@
     ?>
     <form id="uploadForm" action="process.php" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?php echo htmlspecialchars($id); ?>"> <!-- Скрытое поле для id -->
-        <p><label for="second_name">Фамилия</label><input type="text" name="second_name" placeholder=""
+        <label for="second_name">Фамилия</label><input type="text" name="second_name" placeholder=""
                 pattern="^[А-ЯЁа-яёA-Za-z]+" required>
             <label for="name">Имя</label><input type="text" name="name" placeholder="" pattern="^[А-ЯЁа-яёA-Za-z]+"
                 required>
@@ -29,28 +28,28 @@
             <label><input type="checkbox" id="fullname_changed" name="fullname_changed">если изменяли фамилию, имя или
                 отчество</label>
         <div id="fullname_changed_inputs"></div>
-        </p>
+        
 
-        <p><label for="date_birth">Дата рождения</label><input type="date" name="data_birth" id="data_birth"
-                placeholder="" min="1900-01-01" required></p>
-        <p><label for="place_birth">Место рождения</label><input type="text" name="place_birth" id="place_birth"
+        <label for="date_birth">Дата рождения</label><input type="date" name="data_birth" id="data_birth"
+                placeholder="" min="1900-01-01" required>
+        <label for="place_birth">Место рождения</label><input type="text" name="place_birth" id="place_birth"
                 placeholder="" required>
             <br>(село, деревня, город, район, область, край, республика)
-        </p>
+        
 
-        <p><label for="mail">Адрес электронной почты</label><input type="email" id="mail" name="mail" placeholder=""
-                required></p>
-        <p><label for="phone">Номер телефона</label><input type="text" id="phone" name="phone"
-                pattern="^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$" required></p>
+        <label for="mail">Адрес электронной почты</label><input type="email" id="mail" name="mail" placeholder=""
+                required>
+        <label for="phone">Номер телефона</label><input type="text" id="phone" name="phone"
+                pattern="^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$" required>
 
-        <p><label for="of address">Адрес по месту регистрации <br>(индекс, область, район, город, село, деревня, улица,
+        <label for="of address">Адрес по месту регистрации <br>(индекс, область, район, город, село, деревня, улица,
                 дом, корпус, квартира)</label>
             <input type="text" id="off_address" name="off_address" required>
             <label for="fact address">Адрес фактический (если отличается)</label><input type="text" id="fact_address"
                 name="fact_address">
-        </p>
+        
 
-        <p><label for="nation">Гражданство</label><select id="nation" name="nation">
+        <label for="nation">Гражданство</label><select id="nation" name="nation">
                 <option value="russia">РОССИЯ</option>
                 <option value="belarus">БЕЛАРУСЬ</option>
                 <option value="kazakhstan">КАЗАХСТАН</option>
@@ -63,18 +62,15 @@
             <label><input type="checkbox" id="nation_changed" name="nation_changed">укажите если изменяли
                 гражданство</label>
         <div id="nation_changed_inputs"></div>
-        </p>
-
         <div id="nation_inputs"></div>
+        
 
-        <p><label for="title">Ученая степень, ученое звание</label><input type="text" id="scientific_title"
-                name="scientific_title"></p>
-        <p>
+        <label for="title">Ученая степень, ученое звание</label><input type="text" id="scientific_title"
+                name="scientific_title">
 
+        <label>Профессиональное образование</label>
+        <div class="d_table">
         <table border="1">
-            <caption>
-                <p>Профессиональное образование</p>
-            </caption>
             <thead>
                 <tr>
                     <th scope="col">Дата поступления</th>
@@ -87,40 +83,40 @@
             </thead>
             <tbody id="dynamic_1">
                 <tr>
-                    <td><input type="date" id="data start education" name="data start education" min="1900-01-01"
+                    <td><input type="date" id="data start education" name="data start education" min="1950-01-01"
                             class="input_table"></td>
-                    <td><input type="date" id="date end educatioin" name="date end educatioin" min="1900-01-01"
+                    <td><input type="date" id="date end educatioin" name="date end educatioin" min="1950-01-01"
                             class="input_table"></td>
-                    <td><input type="text" name="educational institution" class="input_table"></td>
+                    <td><input type="text" id="university_name" name="university_name"
+                            class="input_table university_name" autocomplete="off">
+                        <div id="suggestions" class="suggestions-box"></div>
+                    </td>
                     <td><input type="text" name="speciality" class="input_table"></td>
                     <td><input type="text" name="number_diplom" class="input_table"></td>
-                    <td><input type="text" name="date_diplom" class="input_table"></td>
+                    <td><input type="date" name="date_diplom" class="input_table"></td>
                 </tr>
             </tbody>
         </table>
-        </p>
+        </div>
         <button type="button" id="add_1">Добавить</button>
         <button type="button" id="del_1">Удалить</button>
 
-        <p>
-        <table border="1">
-            <caption>
-                <p>Выполняемая работа с начала трудовой деятельности (включая учебу в высших и средних специальных
+        <label>Выполняемая работа с начала трудовой деятельности (включая учебу в высших и средних специальных
                     учебных заведениях, военную службу, работу по совместительству, предпринимательскую деятельность и
                     т.п.)
                     <br>
                 <h6>При заполнении данного пункта необходимо именовать учреждения, организации и предприятия так, как
                     они назывались в свое время, военную службу записывать с указанием должности и номера воинской
                     части.
-                </h6>
-                </p>
-            </caption>
+                </h6></label>
+        <div class="d_table">
+        <table border="1">
             <thead>
                 <tr>
                     <th scope="col">Дата поступления</th>
                     <th scope="col">Дата окончания</th>
                     <th scope="col">Наименование учреждения, организации, предприятия</th>
-                    <th scope="col">Должность в учреждения, организации, предприятия</th>
+                    <th scope="col">Должность в учреждении, организации, предприятии</th>
                     <th scope="col">Местонахождение учреждения, организации, предприятия</th>
                 </tr>
             </thead>
@@ -130,17 +126,20 @@
                             class="input_table"></td>
                     <td><input type="date" id="date_end_work" name="date_end_work" min="1900-01-01" class="input_table">
                     </td>
-                    <td><input type="text" name="work_name" class="input_table"></td>
+                    <td><input type="text" name="work_name" class="input_table university_name" autocomplete="off">
+                        <div id="suggestions" class="suggestions-box"></div>
+                    </td>
+                    </td>
                     <td><input type="text" name="job_title" class="input_table"></td>
                     <td><input type="text" name="work_place" class="input_table"></td>
                 </tr>
             </tbody>
         </table>
-        </p>
+        </div>
         <button type="button" id="add_2">Добавить</button>
         <button type="button" id="del_2">Удалить</button>
 
-        <p><label for="family status">Положение в момент заполнения анкеты</label>
+        <label for="family status">Положение в момент заполнения анкеты</label>
             <select id="family_status" name="family status">
                 <option value="registred_marriage">Состою в зарегистрированном браке</option>
                 <option value="unregistred_marriage">Состою в незарегистрированном браке</option>
@@ -149,12 +148,10 @@
                 <option value="no_married">Никогда не состоял(а) в браке</option>
                 <option value="separated">Разошелся(лась)</option>
             </select>
-        </p>
-
-        <p>
+        
+        <label>Ваши близкие родственники (отец, мать, братья, сестры, дети, а также муж (жена), в том числе бывшие)</label>
+        <div class="d_table">
         <table border="1">
-            <caption>Ваши близкие родственники (отец, мать, братья, сестры, дети, а также муж (жена), в том числе
-                бывшие)</caption>
             <thead>
                 <tr>
                     <th scope="col">Степень родства</th>
@@ -189,21 +186,20 @@
                 </tr>
             </tbody>
         </table>
-        </p>
+        </div>
         <button type="button" id="add_3">Добавить</button>
         <button type="button" id="del_3">Удалить</button>
 
-        <p>
+        
             <legend>Имеются ли у Вас или жены (мужа) родственники, постоянно проживающие за границей?</legend>
-            <label><input type="radio" id="foreign_relative_no" name="foreign_relative" value="no" checked />Не
+            <label class="light"><input type="radio" id="foreign_relative_no" name="foreign_relative" value="no" checked />Не
                 проживают</label>
-            <label><input type="radio" id="foreign_relative_yes" name="foreign_relative" value="yes" />Проживают</label>
+            <label class="light"><input type="radio" id="foreign_relative_yes" name="foreign_relative" value="yes" />Проживают</label>
         <div id="foreign_relative_inputs"></div>
-        </p>
-
-        <p>
+        
+        <label>Отношение к воинской обязанности, воинское звание, ВУС, военкомат</label>
+        <div class="d_table">
         <table border="1">
-            <caption>Отношение к воинской обязанности, воинское звание, ВУС, военкомат</caption>
             <thead>
                 <tr>
                     <th scope="col">Отношение к коинской обязанности</th>
@@ -273,15 +269,14 @@
                 </tr>
             </tbody>
         </table>
-        </p>
+        </div>
 
-        <p><label for="documents_for_benefits">Документы, дающие право на льготы</label><textarea
-                name="documents_for_benefits" cols=50></textarea></p>
+        <label for="documents_for_benefits">Документы, дающие право на льготы</label><textarea
+                name="documents_for_benefits" cols=50></textarea>
 
-        <p>
+        <label>Полное наименование и адрес коммерческих структур, учредителем которых являетесь или являлись</label>
+        <div class="d_table">
         <table border="1">
-            <caption>Полное наименование и адрес коммерческих структур, учредителем которых являетесь или являлись
-            </caption>
             <thead>
                 <tr>
                     <th scope="col">Полное наименование</th>
@@ -296,15 +291,13 @@
                 </tr>
             </tbody>
         </table>
-        </p>
+        </div>
         <button type="button" id="add_4">Добавить</button>
         <button type="button" id="del_4">Удалить</button>
 
-
-        <p>
+        <label>Полное наименование и адрес организаций, предприятий и т.п., акциями которых владели или владеете</label>
+        <div class="d_table">
         <table border="1">
-            <caption>Полное наименование и адрес организаций, предприятий и т.п., акциями которых владели или владеете
-            </caption>
             <thead>
                 <tr>
                     <th scope="col">Полное наименование</th>
@@ -318,14 +311,14 @@
                 </tr>
             </tbody>
         </table>
-        </p>
+        </div>
         <button type="button" id="add_5">Добавить</button>
         <button type="button" id="del_5">Удалить</button>
 
-        <p>
+        <label>Полное наименование и адрес организаций, предприятий и т.п., в которых являетесь или являлись
+        аффилированным лицом</label>
+        <div class="d_table">
         <table border="1">
-            <caption>Полное наименование и адрес организаций, предприятий и т.п., в которых являетесь или являлись
-                аффилированным лицом</caption>
             <thead>
                 <tr>
                     <th scope="col">Полное наименование</th>
@@ -340,18 +333,18 @@
                 </tr>
             </tbody>
         </table>
-        </p>
+        </div>  
         <button type="button" id="add_6">Добавить</button>
         <button type="button" id="del_6">Удалить</button>
 
-        <p>
+        
             <legend>Наличие судимости</legend>
-            <label><input type="radio" id="criminal_record_no" name="criminal_record" value="no" checked />Нет</label>
-            <label><input type="radio" id="criminal_record_yes" name="criminal_record" value="yes" />Да</label>
+            <label class="light"><input type="radio" id="criminal_record_no" name="criminal_record" value="no" checked />Нет</label>
+            <label class="light"><input type="radio" id="criminal_record_yes" name="criminal_record" value="yes" />Да</label>
         <div id="criminal_record_inputs"></div>
-        </p>
+        
 
-        <p><label for="source_info_work">Источник получения информации о данном месте работы</label>
+        <label for="source_info_work">Источник получения информации о данном месте работы</label>
             <select name="source_info_work" id="source_info_work">
                 <option value="source_info_work_sites">hh.ru или другие работные сайты</option>
                 <option value="source_info_work_social_network">соцсети</option>
@@ -359,59 +352,63 @@
                 <option value="source_info_work_recomendation">рекомендации друзей, знакомых</option>
                 <option value="other_source_info_work">Другое</option>
             </select>
-        </p>
+        
         <div id="other_source_info_work_inputs"></div>
 
-        <p><label for="info_work">Сведения о рекомендателях (при наличии) (Ф.И.О., должность и место работы,
+        <label for="info_work">Сведения о рекомендателях (при наличии) (Ф.И.О., должность и место работы,
                 телефон)</label>
             <textarea name="info_work" cols=30 rows=3></textarea>
-        </p>
+        
 
-        <p><label for="additional_info">Дополнительные сведения (государственные награды, участие в выборных
+        <label for="additional_info">Дополнительные сведения (государственные награды, участие в выборных
                 представительных органах, увлечения, а также другая информация, которую желаете сообщить о себе)</label>
             <textarea name="additional_info" cols=50 rows=4></textarea>
-        </p>
+        
 
-        <p><label for="info_finance">Сведения об имуществе и кредитных организациях, в которых имеются счета (информация
+        <label for="info_finance">Сведения об имуществе и кредитных организациях, в которых имеются счета (информация
                 предоставляется на усмотрение (с согласия))</label>
             <textarea name="info_finance" cols=50 rows=4></textarea>
-        </p>
+        
 
 
         <legend>В каких социальных сетях имеются аккаунты</legend>
-        <label><input type="checkbox" id="odnoclassniki" name="network" value="odnoclassniki"
+        <label class="light"><input type="checkbox" id="odnoclassniki" name="network" value="odnoclassniki"
                 checked />Одноклассники</label>
-        <label><input type="checkbox" id="vkontakte" name="network" value="vkontakte" />Вконтакте</label>
-        <label><input type="checkbox" id="telegram" name="network" value="telegram" />Телеграм</label>
-        <label><input type="checkbox" id="other_social_network" name="network" value="other_social_network" />Другое
+        <label class="light"><input type="checkbox" id="vkontakte" name="network" value="vkontakte" />Вконтакте</label>
+        <label class="light"><input type="checkbox" id="telegram" name="network" value="telegram" />Телеграм</label>
+        <label class="light"><input type="checkbox" id="other_social_network" name="network" value="other_social_network" />Другое
             <div id="other_social_network_inputs"></div>
         </label>
 
-        <p>Согласие на обработку персональных данных<br>
+        Согласие на обработку персональных данных<br>
             <a href="https://cloud.naftagaz.com/s/aNBABJF6rfbmCyk">https://cloud.naftagaz.com/s/aNBABJF6rfbmCyk</a>
-        </p>
+        
 
-        <p>Фотография, фото или скан документов(паспорт, снилс и инн) и согласие на обработку персональных данных</p>
-        <p>
+        Фотография, фото или скан документов(паспорт, снилс и инн) и согласие на обработку персональных данных
+        
         <div class="file-upload-area" onclick="document.getElementById('file_input').click();">
             Нажмите здесь, чтобы загрузить файлы
             <input type="file" name="file_list[]" id="file_input" multiple onchange="handleFiles(this.files)">
         </div>
-        </p>
+        
 
-        <p>
+        
         <div id="file_list"></div>
         <div id="errorMessageDiv"></div>
-        </p>
+        
 
-        <p><label><input type="checkbox" id="confirm" name="confirm" required />Я подтверждаю, что все указанные мною в
+        <label for="address">Адрес</label>
+        <input type="text" id="address" name="address" placeholder="Введите адрес" autocomplete="off">
+        <div id="address-suggestions" class="suggestions-box"></div>    
+
+        <label class="light"><input type="checkbox" id="confirm" name="confirm" required />Я подтверждаю, что все указанные мною в
                 настоящей анкете сведения полны и соответствуют действительности.
                 Мне известно, что заведомо ложные сведения, сообщенные о себе в анкете, могут повлечь отказ в
                 трудоустройстве либо расторжение трудового договора.
                 На проведение в отношении меня проверочных мероприятий согласен(а).
                 При изменении любых анкетных данных обязуюсь в 3-х дневный срок сообщить в подразделение по управлению
                 персоналом новые сведения.
-            </label></p>
+            </label>
 
         <input type="submit" style="margin: 20px">
     </form>

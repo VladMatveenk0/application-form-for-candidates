@@ -10,13 +10,26 @@ body {
   font-family: 'Lato', sans-serif;
   color: #333;
   background-color: #f8f8f9;
+  font-size: 1rem; /* базовый размер шрифта */
 }
+
 
 form {
   max-width: 850px;
   margin: 50px auto;
   padding: 16px;
   border: 1px solid #eaeaea;
+}
+
+div {
+  overflow-y: auto;
+  display: block;
+}
+
+table {
+  width: 150%;
+  border-collapse: collapse;
+  display: table;
 }
 
 input[type="text"],
@@ -32,23 +45,24 @@ input[type="url"],
 textarea,
 select {
   background-color: #ffffff;
-  border: 1px solid #e5e5e4;
-  font-size: 16px;
-  height: auto;
+  border: 0.0625rem solid #e5e5e4; /* 1px / 16px = 0.0625rem */
+  font-size: 1rem; /* 16px / 16px = 1rem */
+  height: 3rem; /* 48px / 16px = 3rem */
   margin: 0;
   outline: 0;
-  padding: 8px 10px;
-  height: 48px;
+  padding: 0.5rem; /* 8px / 16px = 0.5rem */
   width: 100%;
-  max-width: 800px;
   color: #8a97a0;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
-  margin-bottom: 16px;
-  transition: all .2s ease;
+  box-shadow: 0 0.0625rem 0 rgba(0, 0, 0, 0.03) inset; /* 1px / 16px = 0.0625rem */
+  transition: all 0.2s ease;
 }
 
-input.input_table {
-  margin-bottom: 0px;
+
+input[type="text"][name="passport_seria"],
+input[type="text"][name="passport_number"] {
+  width: calc(50% - 2px);
+  display: inline-block;
+  vertical-align: top;
 }
 
 input::placeholder {
@@ -63,65 +77,51 @@ select:focus {
 
 input[type="radio"],
 input[type="checkbox"] {
-  padding-right: 1px;
-  margin: 0 4px 8px 0;
+  padding-right: 0.25rem; /* 4px / 16px = 0.25rem */
+  margin: 0 0.5rem 0 0; /* 8px / 16px = 0.5rem */
 }
 
 select {
-  padding: 6px;
-  height: 48px;
-  border-radius: 0px;
+  padding: 0.5rem; /* 8px / 16px = 0.5rem */
+  height: 3rem; /* 48px / 16px = 3rem */
+  border-radius: 0;
 }
 
 button {
-  font-size: 16px;
-  font-weight: 600;
-  text-transform: uppercase;
-  padding: 15px 26px;
+  padding: 1rem 2rem; /* 16px / 16px = 1rem, 40px / 16px = 2.5rem */
   color: #FFF;
   background-color: #0f868c;
-  border-radius: 4px;
-  border: 1px solid #0f868c;
+  border-radius: 0.25rem; /* 4px / 16px = 0.25rem */
+  border: 0.0625rem solid #0f868c; /* 1px / 16px = 0.0625rem */
   text-align: center;
-  width: 100%;
-  max-width: 120px;
 }
 
 fieldset {
-  margin-bottom: 28px;
-  border: none;
-}
-
-legend {
-  font-size: 16px;
-  font-weight: 400;
-  margin-bottom: 16px;
+  margin-bottom: 2.5rem; /* 40px / 16px = 2.5rem */
+  border: 0.0625rem solid #c0c0c0; /* 1px / 16px = 0.0625rem */
+  padding: 0.5rem 0.625rem; /* 8px / 16px = 0.5rem, 10px / 16px = 0.625rem */
 }
 
 label {
   display: block;
-  line-height: 24px;
-  font-size: 16px;
-  font-weight: 400;
-  margin-bottom: 4px;
+  line-height: 2.5rem; /* 40px / 16px = 2.5rem */
 }
 
 label.light {
-  font-weight: 300;
-  display: inline;
+  display: block  ;
+  line-height: 2rem; /* 40px / 16px = 2.5rem */
 }
 
-table {
-  max-width: 800px;
-  width: 100%;
+th {
+  font-weight: normal;
 }
 
 .file-upload-area {
-  border: 2px dashed #4CAF50;
-  padding: 20px;
+  border: 0.125rem dashed #4CAF50;
+  padding: 1rem;
   text-align: center;
-  border-radius: 5px;
-  margin: 10px 0;
+  border-radius: 0.25rem;
+  margin: 0.6rem 0;
   cursor: pointer;
 }
 #file_list {
@@ -143,4 +143,26 @@ table {
 }
 input[type="file"] {
   display: none; /* Скрываем стандартный элемент */
+}
+
+.suggestions-box {
+  border: 1px solid #ccc;
+  max-height: 150px;
+  overflow-y: auto;
+  position: absolute;
+  background-color: white;
+  z-index: 1000;
+}
+
+.suggestion-item {
+  padding: 10px;
+  cursor: pointer;
+  display: flex; /* Используем flex для размещения крестика */
+  justify-content: space-between; /* Размещаем элементы по краям */
+}
+
+.close-suggestion {
+  cursor: pointer;
+  margin-left: 10px; /* Отступ между текстом и крестиком */
+  color: red; /* Цвет крестика */
 }
