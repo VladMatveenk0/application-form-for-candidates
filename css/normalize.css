@@ -104,11 +104,6 @@ fieldset {
 
 label {
   display: block;
-  line-height: 2.5rem; /* 40px / 16px = 2.5rem */
-}
-
-label.light {
-  display: block  ;
   line-height: 2rem; /* 40px / 16px = 2.5rem */
 }
 

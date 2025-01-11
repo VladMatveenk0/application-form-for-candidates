@@ -192,9 +192,9 @@
 
         
             <legend>Имеются ли у Вас или жены (мужа) родственники, постоянно проживающие за границей?</legend>
-            <label class="light"><input type="radio" id="foreign_relative_no" name="foreign_relative" value="no" checked />Не
+            <label><input type="radio" id="foreign_relative_no" name="foreign_relative" value="no" checked />Не
                 проживают</label>
-            <label class="light"><input type="radio" id="foreign_relative_yes" name="foreign_relative" value="yes" />Проживают</label>
+            <label><input type="radio" id="foreign_relative_yes" name="foreign_relative" value="yes" />Проживают</label>
         <div id="foreign_relative_inputs"></div>
         
         <label>Отношение к воинской обязанности, воинское звание, ВУС, военкомат</label>
@@ -339,8 +339,8 @@
 
         
             <legend>Наличие судимости</legend>
-            <label class="light"><input type="radio" id="criminal_record_no" name="criminal_record" value="no" checked />Нет</label>
-            <label class="light"><input type="radio" id="criminal_record_yes" name="criminal_record" value="yes" />Да</label>
+            <label><input type="radio" id="criminal_record_no" name="criminal_record" value="no" checked />Нет</label>
+            <label><input type="radio" id="criminal_record_yes" name="criminal_record" value="yes" />Да</label>
         <div id="criminal_record_inputs"></div>
         
 
@@ -348,7 +348,7 @@
             <select name="source_info_work" id="source_info_work">
                 <option value="source_info_work_sites">hh.ru или другие работные сайты</option>
                 <option value="source_info_work_social_network">соцсети</option>
-                <option value="source_info_work_ad">реклама</option>
+                <option value="source_info_work_ad">реклама наружная</option>
                 <option value="source_info_work_recomendation">рекомендации друзей, знакомых</option>
                 <option value="other_source_info_work">Другое</option>
             </select>
@@ -372,36 +372,28 @@
 
 
         <legend>В каких социальных сетях имеются аккаунты</legend>
-        <label class="light"><input type="checkbox" id="odnoclassniki" name="network" value="odnoclassniki"
+        <label><input type="checkbox" id="odnoclassniki" name="network" value="odnoclassniki"
                 checked />Одноклассники</label>
-        <label class="light"><input type="checkbox" id="vkontakte" name="network" value="vkontakte" />Вконтакте</label>
-        <label class="light"><input type="checkbox" id="telegram" name="network" value="telegram" />Телеграм</label>
-        <label class="light"><input type="checkbox" id="other_social_network" name="network" value="other_social_network" />Другое
+        <label><input type="checkbox" id="vkontakte" name="network" value="vkontakte" />Вконтакте</label>
+        <label><input type="checkbox" id="telegram" name="network" value="telegram" />Телеграм</label>
+        <label><input type="checkbox" id="other_social_network" name="network" value="other_social_network" />Другое
             <div id="other_social_network_inputs"></div>
         </label>
 
-        Согласие на обработку персональных данных<br>
-            <a href="https://cloud.naftagaz.com/s/aNBABJF6rfbmCyk">https://cloud.naftagaz.com/s/aNBABJF6rfbmCyk</a>
+        <p>Согласие на обработку персональных данных<br>
+        <a href="https://cloud.naftagaz.com/s/aNBABJF6rfbmCyk">https://cloud.naftagaz.com/s/aNBABJF6rfbmCyk</a></p>
         
-
-        Фотография, фото или скан документов(паспорт, снилс и инн) и согласие на обработку персональных данных
+        <p>Приложите следующие документы: фотография, фото или скан паспорта, снилса, инн и согласия на обработку персональных данных
         
         <div class="file-upload-area" onclick="document.getElementById('file_input').click();">
             Нажмите здесь, чтобы загрузить файлы
             <input type="file" name="file_list[]" id="file_input" multiple onchange="handleFiles(this.files)">
         </div>
         
-
-        
         <div id="file_list"></div>
-        <div id="errorMessageDiv"></div>
-        
+        <div id="errorMessageDiv"></div></p>
 
-        <label for="address">Адрес</label>
-        <input type="text" id="address" name="address" placeholder="Введите адрес" autocomplete="off">
-        <div id="address-suggestions" class="suggestions-box"></div>    
-
-        <label class="light"><input type="checkbox" id="confirm" name="confirm" required />Я подтверждаю, что все указанные мною в
+        <label><input type="checkbox" id="confirm" name="confirm" required />Я подтверждаю, что все указанные мною в
                 настоящей анкете сведения полны и соответствуют действительности.
                 Мне известно, что заведомо ложные сведения, сообщенные о себе в анкете, могут повлечь отказ в
                 трудоустройстве либо расторжение трудового договора.

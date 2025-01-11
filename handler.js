@@ -61,6 +61,7 @@ nationSelect.addEventListener("change", (event) => {
                 <input type="text" name="passport_number" placeholder="Номер" pattern="[0-9]{6}" required>\
                 <label for="passport_date">Когда выдан</label><input type="date" name="passport_date" min="1900-01-01" required>\
                 <label for="passport_place">Кем выдан</label><input type="text" name="passport_place" placeholder="" required>\
+                <label for="snils">Номер страхового свидетельства государственного пенсионного страхования</label>\
                 <input type="text" id="snils" name="snils" pattern="[0-9]{3}-[0-9]{3}-[0-9]{5}" placeholder="СНИЛС: 000-000-00000"> \
                 <label for="inn">Индивидуальный номер налогоплательщика</label><input type="text" id="inn" name="inn" pattern="[0-9]{12}" placeholder="ИНН: 000000000000">\
             </p>';
@@ -100,8 +101,8 @@ document.querySelectorAll("input[name=foreign_relative]").forEach(foreign_relati
     foreign_relativeRadio.addEventListener("change", (e) => {
         if (foreign_relativeRadio.value == "yes") {
             document.getElementById("foreign_relative_inputs").innerHTML = '\
+            <label>Укажите их фио, год рождения, степень родства,где проживают и с какого времени они проживают за границей</label>\
             <p><table border="1">\
-                <caption>Укажите их фио, год рождения, степень родства,где проживают и с какого времени они проживают за границей</caption>\
                     <thead>\
                         <tr>\
                             <th scope="col">Степень родства</th>\
@@ -176,7 +177,12 @@ let fileList = [];
 
 // Функция для обработки загруженных файлов
 function handleFiles(files) {
+    const maxFileSize = 5 * 1024 * 1024; // Максимальный размер файла 5 МБ
     for (let i = 0; i < files.length; i++) {
+        if (files[i].size > maxFileSize) {
+            alert("Файл слишком большой. Максимальный размер файла 5 МБ.");
+            return;
+        }
         fileList.push(files[i]);
     }
     displayFiles();
