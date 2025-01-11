@@ -47,31 +47,43 @@ if ($stmt->execute()) {
 }
 
 // Обработка загруженных файлов
-$uploadDir = 'uploads/'; // Папка для сохранения загруженных файлов
+$uploadDir = 'uploads/';
 $maxFileSize = 5 * 1024 * 1024; // Максимальный размер файла 5 МБ
 
-if (isset($_FILES['file_list'])) {
-    $fileList = $_FILES['file_list'];
-    $uploadedFiles = [];
-    if (!empty($fileList)) {
-        for ($i = 0; $i < count($fileList['name']); $i++) {
-            if ($fileList['error'][$i] === UPLOAD_ERR_OK) {
-                if ($fileList['size'][$i] <= $maxFileSize) {
-                    $tmpName = $fileList['tmp_name'][$i];
-                    $fileName = basename($fileList['name'][$i]);
-                    $uploadFilePath = $uploadDir . uniqid() . '_' . $fileName; // Уникальное имя файла
+// Создаем папку пользователя
+$userDir = $uploadDir . $id . '_' . $fullName;
+if (!is_dir($userDir)) {
+    mkdir($userDir, 0777, true);
+}
 
-                    if (move_uploaded_file($tmpName, $uploadFilePath)) {
-                        $uploadedFiles[] = $uploadFilePath; // Сохраняем путь к загруженному файлу
-                    } else {
-                        echo "Ошибка при загрузке файла: " . $fileName;
-                    }
+foreach ($_FILES as $key => $files) {
+    if (is_array($files['tmp_name'])) {
+        foreach ($files['tmp_name'] as $index => $tmpName) {
+            $fileName = basename($files['name'][$index]);
+            if ($files['error'][$index] === UPLOAD_ERR_OK) {
+                $uploadFilePath = $userDir . '/' . uniqid() . '_' . $fileName;
+
+                if (move_uploaded_file($tmpName, $uploadFilePath)) {
+                    echo "Файл $fileName успешно загружен!";
                 } else {
-                    echo "Файл " . $fileList['name'][$i] . " превышает максимальный размер 5 МБ и не будет загружен.";
+                    echo "Ошибка при загрузке файла $fileName";
                 }
             } else {
-                echo "Ошибка загрузки файла: " . $fileList['name'][$i];
+                echo "Ошибка загрузки файла $fileName";
             }
+        }
+    } else {
+        $fileName = basename($files['name']);
+        if ($files['error'] === UPLOAD_ERR_OK) {
+            $uploadFilePath = $userDir . '/' . uniqid() . '_' . $fileName;
+
+            if (move_uploaded_file($files['tmp_name'], $uploadFilePath)) {
+                echo "Файл $fileName успешно загружен!";
+            } else {
+                echo "Ошибка при загрузке файла $fileName";
+            }
+        } else {
+            echo "Ошибка загрузки файла $fileName";
         }
     }
 }

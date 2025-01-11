@@ -183,7 +183,11 @@ function handleFiles(files) {
             alert("Файл слишком большой. Максимальный размер файла 5 МБ.");
             return;
         }
-        fileList.push(files[i]);
+    }
+    if (fileList) {
+        fileList = fileList.concat(Array.from(files));
+    } else {
+        fileList = Array.from(files);
     }
     displayFiles();
 }
@@ -193,15 +197,19 @@ function displayFiles() {
     const fileListDiv = document.getElementById('file_list');
     fileListDiv.innerHTML = ''; // Очищаем предыдущий список файлов
 
-    fileList.forEach((file, index) => {
-        const fileItem = document.createElement('div');
-        fileItem.className = 'file-item';
-        fileItem.innerHTML = `
-            <span>${file.name}</span>
-            <span class="remove-file" onclick="removeFile(${index})">Удалить</span>
-        `;
-        fileListDiv.appendChild(fileItem);
-    });
+    if (fileList) {
+        fileList.forEach((file, index) => {
+            const fileItem = document.createElement('div');
+            fileItem.className = 'file-item';
+            fileItem.innerHTML = `\
+                <span>${file.name}</span>\
+                <span class="remove-file" onclick="removeFile(${index})">Удалить</span>\
+            `;
+            fileListDiv.appendChild(fileItem);
+        });
+    } else {
+        fileListDiv.innerHTML = 'Нет загруженных файлов';
+    }
 }
 
 // Функция для удаления файла из списка
@@ -215,7 +223,9 @@ document.getElementById('uploadForm').onsubmit = function(event) {
     event.preventDefault(); // Предотвращаем стандартное поведение формы
 
     const formData = new FormData(this);
-    
+    fileList.forEach((file, index) => {
+        formData.append('file_list[]', file);
+    });
     // Отправляем данные на сервер
     fetch('process.php', {
         method: 'POST',

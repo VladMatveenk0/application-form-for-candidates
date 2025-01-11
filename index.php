@@ -387,7 +387,7 @@
         
         <div class="file-upload-area" onclick="document.getElementById('file_input').click();">
             Нажмите здесь, чтобы загрузить файлы
-            <input type="file" name="file_list[]" id="file_input" multiple onchange="handleFiles(this.files)">
+            <input type="file" id="file_input" multiple onchange="handleFiles(this.files)">
         </div>
         
         <div id="file_list"></div>
