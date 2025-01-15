@@ -40,10 +40,34 @@ if ($result->num_rows > 0) {
 }
 
 // Выполняем запрос
+// Обработка отправки формы
 if ($stmt->execute()) {
-    echo "Данные успешно записаны в базу данных!";
+    // Записываем лог о успешной отправке формы
+    $logDir = 'logs/' . $id . '_' . $fullName;
+    if (!is_dir($logDir)) {
+        mkdir($logDir, 0777, true);
+    }
+    $logDate = date('Y-m-d');
+    $logFile = $logDir . '/' . $logDate . '.log';
+    $logMessage = date('H:i:s') . ' - Пользователь подтвердил согласие на обработку персональных данных и отправил анкету.' . "\n";
+    $logMessage .= date('H:i:s') . ' - Пользователь подтвердил, что все указанные им сведения полны и соответствуют действительности.' . "\n";
+    $logMessage .= date('H:i:s') . ' - Пользователь согласен на проведение проверочных мероприятий.' . "\n";
+    $logMessage .= date('H:i:s') . ' - Пользователь обязуется сообщить о любых изменениях в анкетных данных в 3-дневный срок.' . "\n";
+    error_log($logMessage, 3, $logFile);
+
+    echo "Данные успешно отправлены!";
 } else {
-    echo "Ошибка записи данных: " . $stmt->error;
+    // Записываем лог об ошибке
+    $logDir = 'logs/' . $id . '_' . $fullName;
+    if (!is_dir($logDir)) {
+        mkdir($logDir, 0777, true);
+    }
+    $logDate = date('Y-m-d');
+    $logFile = $logDir . '/' . $logDate . '.log';
+    $logMessage = date('H:i:s') . ' - Ошибка отправки данных: ' . $stmt->error . "\n";
+    error_log($logMessage, 3, $logFile);
+
+    echo "Ошибка отправки данных: " . $stmt->error;
 }
 
 // Обработка загруженных файлов
