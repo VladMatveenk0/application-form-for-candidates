@@ -7,6 +7,7 @@ $pass = '6464463017a1p0au3t0@@';
 $charset = 'utf8mb4';
 
 $conn = new mysqli($host, $user, $pass, $db);
+$conn->set_charset("utf8mb4");
 
 if ($conn->connect_error) {
     die("Ошибка подключения: " . $conn->connect_error);

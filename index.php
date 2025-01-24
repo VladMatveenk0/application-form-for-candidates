@@ -17,7 +17,7 @@
     // Получаем id из URL
     $id = isset($_GET['id']) ? $_GET['id'] : null; // Если id не передан, установите null
     ?>
-    <form id="uploadForm" action="process.php" method="post" enctype="multipart/form-data">
+    <form id="uploadForm" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?php echo htmlspecialchars($id); ?>"> <!-- Скрытое поле для id -->
         <label for="second_name">Фамилия</label><input type="text" name="second_name" placeholder=""
                 pattern="^[А-ЯЁа-яёA-Za-z]+" required>
@@ -30,7 +30,7 @@
         <div id="fullname_changed_inputs"></div>
         
 
-        <label for="date_birth">Дата рождения</label><input type="date" name="data_birth" id="data_birth"
+        <label for="date_birth">Дата рождения</label><input type="date" name="date_birth" id="date_birth"
                 placeholder="" min="1900-01-01" required>
         <label for="place_birth">Место рождения</label><input type="text" name="place_birth" id="place_birth"
                 placeholder="" required>
@@ -83,9 +83,9 @@
             </thead>
             <tbody id="dynamic_1">
                 <tr>
-                    <td><input type="date" id="data start education" name="data start education" min="1950-01-01"
+                    <td><input type="date" id="data_start_education" name="data_start_education" min="1950-01-01"
                             class="input_table"></td>
-                    <td><input type="date" id="date end educatioin" name="date end educatioin" min="1950-01-01"
+                    <td><input type="date" id="date_end_education" name="date_end_education" min="1950-01-01"
                             class="input_table"></td>
                     <td><input type="text" id="university_name" name="university_name"
                             class="input_table university_name" autocomplete="off">
@@ -202,7 +202,7 @@
         <table border="1">
             <thead>
                 <tr>
-                    <th scope="col">Отношение к коинской обязанности</th>
+                    <th scope="col">Отношение к воинской обязанности</th>
                     <th scope="col">Воинское звание</th>
                     <th scope="col">ВУС</th>
                     <th scope="col">Годность к военной службе</th>
@@ -214,7 +214,7 @@
                             <option value="Военнообязанный">Военнообязанный</option>
                             <option value="Невоеннообязанный">Невоеннообязанный</option>
                             <option value="Призывник">Призывник</option>
-                            <option value="Военнослужащийr">Военнослужащий</option>
+                            <option value="Военнослужащий">Военнослужащий</option>
                         </select>
                     </td>
                     <td><select id="military_title" name="military_title">
@@ -413,23 +413,23 @@
         // Форматируем дату в формате YYYY-MM-DD
         const formattedDate = today.toISOString().split('T')[0];
         // Устанавливаем максимальную дату в элементе input
-        document.getElementById('data_birth').setAttribute('max', formattedDate);
-        document.getElementById('data start education').setAttribute('max', formattedDate);
+        document.getElementById('date_birth').setAttribute('max', formattedDate);
+        document.getElementById('data_start_education').setAttribute('max', formattedDate);
         document.getElementById('date_start_work').setAttribute('max', formattedDate);
         document.getElementById('date_birth_relative').setAttribute('max', formattedDate);
 
-        btn_add_1 = document.getElementById("add_1");
-        btn_add_2 = document.getElementById("add_2");
-        btn_add_3 = document.getElementById("add_3");
-        btn_add_4 = document.getElementById("add_4");
-        btn_add_5 = document.getElementById("add_5");
-        btn_add_6 = document.getElementById("add_6");
-        btn_del_1 = document.getElementById("del_1");
-        btn_del_2 = document.getElementById("del_2");
-        btn_del_3 = document.getElementById("del_3");
-        btn_del_4 = document.getElementById("del_4");
-        btn_del_5 = document.getElementById("del_5");
-        btn_del_6 = document.getElementById("del_6");
+        const btn_add_1 = document.getElementById("add_1");
+        const btn_add_2 = document.getElementById("add_2");
+        const btn_add_3 = document.getElementById("add_3");
+        const btn_add_4 = document.getElementById("add_4");
+        const btn_add_5 = document.getElementById("add_5");
+        const btn_add_6 = document.getElementById("add_6");
+        const btn_del_1 = document.getElementById("del_1");
+        const btn_del_2 = document.getElementById("del_2");
+        const btn_del_3 = document.getElementById("del_3");
+        const btn_del_4 = document.getElementById("del_4");
+        const btn_del_5 = document.getElementById("del_5");
+        const btn_del_6 = document.getElementById("del_6");
         new DynamicTable(btn_add_1, btn_del_1, document.getElementById("dynamic_1"));
         new DynamicTable(btn_add_2, btn_del_2, document.getElementById("dynamic_2"));
         new DynamicTable(btn_add_3, btn_del_3, document.getElementById("dynamic_3"));

@@ -7,6 +7,7 @@ $pass = '6464463017a1p0au3t0@@'; // Замените на ваш пароль
 $charset = 'utf8mb4';
 // Подключение к базе данных
 $conn = new mysqli($host, $user, $pass, $db);
+$conn->set_charset("utf8mb4");
 
 // Проверка подключения
 if ($conn->connect_error) {
@@ -21,7 +22,8 @@ $id = isset($_POST['id']) ? $_POST['id'] : 0; // Если id не передан
 $fullName = $secondName . ' ' . $name . ' ' . $surname;
 
 // Преобразование массива в JSON
-$jsonData = json_encode($_POST);
+$jsonData = json_encode($_POST, JSON_UNESCAPED_UNICODE);
+
 
 // Проверяем, существует ли запись с таким id в базе данных
 $stmt = $conn->prepare("SELECT * FROM candidates WHERE id = ?");
