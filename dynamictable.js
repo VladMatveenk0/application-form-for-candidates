@@ -33,6 +33,10 @@ var DynamicTable = (function () {
             if (newInput) {
                 setupAutocomplete(newInput);
             }
+            var newInput = newNode.querySelector('#address-input');
+            if (newInput) {
+                setupAutocomplete2(newInput);
+            }
         };
 
         var _delRow = function (row, tBody) {
@@ -44,6 +48,11 @@ var DynamicTable = (function () {
         if (initialInput) {
             setupAutocomplete(initialInput);
         }
+        var initialInput = tBody.rows[0].querySelector('#address-input');
+        if (initialInput) {
+            setupAutocomplete2(initialInput);
+        }
+
     }
 })(this);
 
@@ -93,6 +102,82 @@ function setupAutocomplete(input) {
                         suggestionsBox.appendChild(div);
                     });
                 });
+        } else {
+            suggestionsBox.innerHTML = ''; // очищаем подсказки, если длина запроса меньше 3
+        }
+    });
+
+    // Скрытие подсказок при потере фокуса
+    input.addEventListener('blur', function() {
+        setTimeout(() => {
+            suggestionsBox.innerHTML = ''; // очищаем подсказки при потере фокуса
+        }, 100); // Небольшая задержка, чтобы клик на подсказку успел обработаться
+    });
+}
+
+
+// Автозаполнение для адресов
+
+var url = "https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address";
+var token = "bdb9e5704f10c4fbcb73b02b5feb5c9e8a3d83d4";
+
+
+function setupAutocomplete2(input) {
+    if (!input) return; // Проверка на наличие элемента
+    const suggestionsBox = input.nextElementSibling; // Получаем div для подсказок
+
+    // Создаем крестик для закрытия подсказок
+    const closeButton = document.createElement('span');
+    closeButton.textContent = '✖'; // Символ крестика
+    closeButton.className = 'close-suggestion';
+    closeButton.style.cursor = 'pointer'; // Указываем, что это кликабельный элемент
+    closeButton.style.float = 'right'; // Позиционируем крестик справа
+
+    // Обработчик для крестика
+    closeButton.onclick = (e) => {
+        e.stopPropagation(); // Останавливаем всплытие события
+        suggestionsBox.innerHTML = ''; // очищаем подсказки
+    };
+
+    input.addEventListener('input', function() {
+        const query = this.value;
+
+        if (query.length > 2) { // минимальная длина для поиска
+            var options = {
+                method: "POST",
+                mode: "cors",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "Authorization": "Token " + token
+                },
+                body: JSON.stringify({query: query})
+            }
+            
+            fetch(url, options)
+            .then(response => response.json())
+            .then(data => {
+                suggestionsBox.innerHTML = ''; // очищаем предыдущие подсказки
+
+                // Добавляем крестик только если есть подсказки
+                if (data.suggestions.length > 0) {
+                    suggestionsBox.appendChild(closeButton); // Добавляем крестик обратно
+                }
+
+                data.suggestions.forEach(address => {
+                    const div = document.createElement('div');
+                    div.className = 'suggestion-item';
+                    div.textContent = address.value; // предполагается, что у вас есть поле value
+                    div.onclick = () => {
+                        input.value = address.value; // устанавливаем значение
+                        suggestionsBox.innerHTML = ''; // очищаем подсказки после выбора
+                    };
+                    div.onmousedown = (e) => {
+                        e.preventDefault(); // Предотвращаем потерю фокуса
+                    };
+                    suggestionsBox.appendChild(div);
+                });
+            });
         } else {
             suggestionsBox.innerHTML = ''; // очищаем подсказки, если длина запроса меньше 3
         }

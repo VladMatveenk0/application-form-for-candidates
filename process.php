@@ -24,7 +24,6 @@ $fullName = $secondName . ' ' . $name . ' ' . $surname;
 // Преобразование массива в JSON
 $jsonData = json_encode($_POST, JSON_UNESCAPED_UNICODE);
 
-
 // Проверяем, существует ли запись с таким id в базе данных
 $stmt = $conn->prepare("SELECT * FROM candidates WHERE id = ?");
 $stmt->bind_param("s", $id);

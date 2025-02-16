@@ -175,8 +175,24 @@ other_social_networkCheckbox.addEventListener("change", () => {
 // file logic
 let fileList = [];
 
-// Функция для обработки загруженных файлов
-function handleFiles(files) {
+// Функция для обработки скана согласия
+function handleConsentFile(files) {
+    if (files.length > 1) {
+        alert("Можно загрузить только один файл для согласия.");
+        return;
+    }
+    const file = files[0];
+    if (!file.type.match(/pdf|jpeg|jpg|png/)) {
+        alert("Файл согласия должен быть в формате PDF или изображения.");
+        return;
+    }
+    fileList = fileList.filter(f => !f.name.startsWith("consent_")); // Удаляем предыдущий файл согласия
+    fileList.push({ ...file, name: `consent_${file.name}` }); // Добавляем новый файл с префиксом
+    displayFiles();
+}
+
+// Функция для обработки сканов документов
+function handleDocumentFiles(files) {
     const maxFileSize = 5 * 1024 * 1024; // Максимальный размер файла 5 МБ
     for (let i = 0; i < files.length; i++) {
         if (files[i].size > maxFileSize) {
@@ -184,11 +200,24 @@ function handleFiles(files) {
             return;
         }
     }
-    if (fileList) {
-        fileList = fileList.concat(Array.from(files));
-    } else {
-        fileList = Array.from(files);
+    fileList = fileList.filter(f => !f.name.startsWith("document_")); // Удаляем предыдущие файлы документов
+    files.forEach(file => fileList.push({ ...file, name: `document_${file.name}` })); // Добавляем новые файлы с префиксом
+    displayFiles();
+}
+
+// Функция для обработки фотографии
+function handlePhotoFile(files) {
+    if (files.length > 1) {
+        alert("Можно загрузить только одну фотографию.");
+        return;
     }
+    const file = files[0];
+    if (!file.type.match(/jpeg|jpg|png/)) {
+        alert("Фотография должна быть в формате изображения.");
+        return;
+    }
+    fileList = fileList.filter(f => !f.name.startsWith("photo_")); // Удаляем предыдущую фотографию
+    fileList.push({ ...file, name: `photo_${file.name}` }); // Добавляем новую фотографию с префиксом
     displayFiles();
 }
 
@@ -197,7 +226,7 @@ function displayFiles() {
     const fileListDiv = document.getElementById('file_list');
     fileListDiv.innerHTML = ''; // Очищаем предыдущий список файлов
 
-    if (fileList) {
+    if (fileList.length > 0) {
         fileList.forEach((file, index) => {
             const fileItem = document.createElement('div');
             fileItem.className = 'file-item';
@@ -219,7 +248,7 @@ function removeFile(index) {
 }
 
 // Обработка отправки формы
-document.getElementById('uploadForm').onsubmit = function(event) {
+document.getElementById('uploadForm').onsubmit = function (event) {
     event.preventDefault(); // Предотвращаем стандартное поведение формы
 
     const formData = new FormData(this);
@@ -231,18 +260,18 @@ document.getElementById('uploadForm').onsubmit = function(event) {
         method: 'POST',
         body: formData
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Сетевая ошибка: ' + response.status);
-        }
-        return response.text();
-    })
-    .then(data => {
-        console.log(data); // Обработка ответа от сервера
-        window.location.href = 'index_2.html'; // Перенаправление на другую страницу
-    })
-    .catch(error => {
-        console.error('Ошибка:', error);
-        alert('Произошла ошибка при отправке формы. Пожалуйста, попробуйте позже.');
-    });
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Сетевая ошибка: ' + response.status);
+            }
+            return response.text();
+        })
+        .then(data => {
+            console.log(data); // Обработка ответа от сервера
+            window.location.href = 'index_2.html'; // Перенаправление на другую страницу
+        })
+        .catch(error => {
+            console.error('Ошибка:', error);
+            alert('Произошла ошибка при отправке формы. Пожалуйста, попробуйте позже.');
+        });
 };
