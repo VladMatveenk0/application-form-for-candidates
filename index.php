@@ -396,23 +396,11 @@
             <a href="https://cloud.naftagaz.com/s/aNBABJF6rfbmCyk">https://cloud.naftagaz.com/s/aNBABJF6rfbmCyk</a>
         </p>
 
-        <!-- Поле для скана согласия -->
-        <div class="file-upload-area" onclick="document.getElementById('consent_file').click();">
-            Нажмите здесь, чтобы загрузить скан согласия (только 1 файл, PDF или изображение)
-            <input type="file" id="consent_file" accept=".pdf,.jpg,.jpeg,.png" onchange="handleConsentFile(this.files)">
-        </div>
-
-        <!-- Поле для сканов документов -->
         <div class="file-upload-area" onclick="document.getElementById('document_files').click();">
             Нажмите здесь, чтобы загрузить сканы документов (можно несколько файлов)
-            <input type="file" id="document_files" multiple onchange="handleDocumentFiles(this.files)">
+            <input type="file" id="document_files" multiple onchange="handleFiles(this.files)">
         </div>
 
-        <!-- Поле для фотографии -->
-        <div class="file-upload-area" onclick="document.getElementById('photo_file').click();">
-            Нажмите здесь, чтобы загрузить фотографию (только 1 файл, изображение)
-            <input type="file" id="photo_file" accept=".jpg,.jpeg,.png" onchange="handlePhotoFile(this.files)">
-        </div>
 
         <div id="file_list"></div>
 
